@@ -1,2 +1,2 @@
 # IMXRT1050-EVKB_BSP
-Board support repository for the NXP IMXRT1050-EVKB
+NXP IMXRT1050-EVKB board support CMSIS Software Pack
