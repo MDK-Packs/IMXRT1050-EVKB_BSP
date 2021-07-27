@@ -2,7 +2,7 @@
  * @file     vio_IMXRT1050-EVKB.c
  * @brief    Virtual I/O implementation for board IMXRT1050-EVKB
  * @version  V1.0.0
- * @date     22. July 2021
+ * @date     21. July 2021
  ******************************************************************************/
 /*
  * Copyright (c) 2021 Arm Limited (or its affiliates). All rights reserved.
@@ -26,8 +26,10 @@
 The table below lists the physical I/O mapping of this CMSIS-Driver VIO implementation.
 Virtual Resource  | Variable       | Physical Resource on IMXRT1050-EVKB            |
 :-----------------|:---------------|:-----------------------------------------------|
-vioBUTTON0        | vioSignalIn.0  | SW8 (USER_BUTTON)                              |
+vioBUTTON0        | vioSignalIn.0  | WAKEUP SW8(USER_BUTTON)                        |
 vioLED0           | vioSignalOut.0 | GPIO_AD_B0_09 (USER_LED)                       |
+vioMotionAccelero | vioValueXYZ[1] | 3-Axis Accelerometer (FXOS8700CQ)              |
+vioMotionMagneto  | vioValueXYZ[2] | 3-Axis Magnetometer (FXOS8700CQ)               |
 */
 
 #include <stdio.h>
@@ -42,6 +44,8 @@ vioLED0           | vioSignalOut.0 | GPIO_AD_B0_09 (USER_LED)                   
 #include "fsl_common.h"
 #include "fsl_iomuxc.h"
 #include "fsl_gpio.h"
+#include "fsl_fxos.h"
+#include "fsl_lpi2c.h"
 #include "peripherals.h"
 #include "pin_mux.h"
 #include "board.h"
@@ -70,7 +74,11 @@ __USED vioAddrIPv6_t vioAddrIPv6[VIO_IPV6_ADDRESS_NUM];                 // Memor
 #endif
 
 #if !defined CMSIS_VIN
-// Add global user types, variables, functions here:
+// Global user types, variables, functions:
+  lpi2c_master_handle_t g_m_handle;
+  const uint8_t g_accel_address = 0x1FU;
+  fxos_handle_t g_fxosHandle = {0};
+  fxos_config_t config = {0};
 
 #endif
 
@@ -96,12 +104,23 @@ void vioInit (void) {
 
 #if !defined CMSIS_VOUT
   // Initialize LEDs pins
-  BOARD_InitLED();
+  BOARD_InitUSER_LED();
 #endif
 
 #if !defined CMSIS_VIN
   // Initialize buttons pins
-  BOARD_InitButtons();
+  BOARD_InitUSER_BUTTON();
+
+  BOARD_InitI2C();
+  BOARD_Accel_I2C_Init();
+
+  config.I2C_SendFunc    = BOARD_Accel_I2C_Send;
+  config.I2C_ReceiveFunc = BOARD_Accel_I2C_Receive;
+  config.slaveAddress    = g_accel_address;
+  if (FXOS_Init(&g_fxosHandle, &config) != kStatus_Success)
+    {
+        while (1);
+    }
 #endif
 }
 
@@ -252,7 +271,8 @@ vioValueXYZ_t vioGetXYZ (uint32_t id) {
   uint32_t index = id;
   vioValueXYZ_t valueXYZ = {0, 0, 0};
 #if !defined CMSIS_VIN
-// Add user variables here:
+  // MEMS variables
+  fxos_data_t fxos_data = {0};
 
 #endif
 
@@ -261,9 +281,25 @@ vioValueXYZ_t vioGetXYZ (uint32_t id) {
   }
 
 #if !defined CMSIS_VIN
-// Add user code here:
+  // Get input xyz values from MEMS
 
-//   vioValueXYZ[index] = ...;
+  if (id == vioMotionAccelero) {
+    if (FXOS_ReadSensorData(&g_fxosHandle, &fxos_data) != kStatus_Success){
+      while(1);
+    }
+    vioValueXYZ[index].X = (int32_t)((uint16_t)((uint16_t)fxos_data.accelXMSB << 8) | (uint16_t)fxos_data.accelXLSB) / 4U;
+    vioValueXYZ[index].Y = (int32_t)((uint16_t)((uint16_t)fxos_data.accelYMSB << 8) | (uint16_t)fxos_data.accelYLSB) / 4U;
+    vioValueXYZ[index].Z = (int32_t)((uint16_t)((uint16_t)fxos_data.accelZMSB << 8) | (uint16_t)fxos_data.accelZLSB) / 4U;
+  }
+
+  if (id == vioMotionMagneto) {
+    if (FXOS_ReadSensorData(&g_fxosHandle, &fxos_data) != kStatus_Success){
+      while(1);
+    }
+    vioValueXYZ[index].X = (int32_t)(int16_t)((uint16_t)((uint16_t)fxos_data.magXMSB << 8) | (uint16_t)fxos_data.magXLSB);
+    vioValueXYZ[index].Y = (int32_t)(int16_t)((uint16_t)((uint16_t)fxos_data.magYMSB << 8) | (uint16_t)fxos_data.magYLSB);
+    vioValueXYZ[index].Z = (int32_t)(int16_t)((uint16_t)((uint16_t)fxos_data.magZMSB << 8) | (uint16_t)fxos_data.magZLSB);
+  }
 #endif
 
   valueXYZ = vioValueXYZ[index];

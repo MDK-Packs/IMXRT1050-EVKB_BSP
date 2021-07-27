@@ -6,11 +6,11 @@
 /*
  * TEXT BELOW IS USED AS SETTING FOR TOOLS *************************************
 !!GlobalInfo
-product: Pins v9.0
+product: Pins v10.0
 processor: MIMXRT1052xxxxB
 package_id: MIMXRT1052DVL6B
 mcu_data: ksdk2_0
-processor_version: 9.0.0
+processor_version: 10.0.0
 board: IMXRT1050-EVKB
 pin_labels:
 - {pin_num: E3, pin_signal: GPIO_EMC_00, label: SEMC_D0, identifier: SEMC_D0}
@@ -220,14 +220,20 @@ pin_labels:
  * 
  * END ****************************************************************************************************************/
 void BOARD_InitBootPins(void) {
-    BOARD_InitLED();
-    BOARD_InitButtons();
+    BOARD_InitPins();
+    BOARD_InitDEBUG_UART();
+    BOARD_InitENET();
+    BOARD_InitUSDHC();
+    BOARD_InitARDUINO_UART();
+    BOARD_InitUSER_LED();
+    BOARD_InitUSER_BUTTON();
+    BOARD_InitI2C();
 }
 
 /*
  * TEXT BELOW IS USED AS SETTING FOR TOOLS *************************************
 BOARD_InitPins:
-- options: {callFromInitBoot: 'false', coreID: core0, enableClock: 'true'}
+- options: {callFromInitBoot: 'true', coreID: core0, enableClock: 'true'}
 - pin_list: []
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS ***********
  */
@@ -245,7 +251,7 @@ void BOARD_InitPins(void) {
 /*
  * TEXT BELOW IS USED AS SETTING FOR TOOLS *************************************
 BOARD_InitDEBUG_UART:
-- options: {callFromInitBoot: 'false', coreID: core0, enableClock: 'true'}
+- options: {callFromInitBoot: 'true', coreID: core0, enableClock: 'true'}
 - pin_list:
   - {pin_num: K14, peripheral: LPUART1, signal: TX, pin_signal: GPIO_AD_B0_12, software_input_on: Disable, hysteresis_enable: Disable, pull_up_down_config: Pull_Down_100K_Ohm,
     pull_keeper_select: Keeper, pull_keeper_enable: Enable, open_drain: Disable, speed: MHZ_100, drive_strength: R0_6, slew_rate: Slow}
@@ -534,7 +540,7 @@ void BOARD_InitCAN(void) {
 /*
  * TEXT BELOW IS USED AS SETTING FOR TOOLS *************************************
 BOARD_InitENET:
-- options: {callFromInitBoot: 'false', coreID: core0, enableClock: 'true'}
+- options: {callFromInitBoot: 'true', coreID: core0, enableClock: 'true'}
 - pin_list:
   - {pin_num: A7, peripheral: ENET, signal: enet_mdc, pin_signal: GPIO_EMC_40, pull_keeper_enable: Disable, slew_rate: Fast}
   - {pin_num: C7, peripheral: ENET, signal: enet_mdio, pin_signal: GPIO_EMC_41, pull_keeper_enable: Disable, slew_rate: Fast}
@@ -546,8 +552,6 @@ BOARD_InitENET:
   - {pin_num: B12, peripheral: ENET, signal: 'enet_tx_data, 0', pin_signal: GPIO_B1_07, pull_keeper_enable: Disable, slew_rate: Fast}
   - {pin_num: A12, peripheral: ENET, signal: 'enet_tx_data, 1', pin_signal: GPIO_B1_08, pull_keeper_enable: Disable, slew_rate: Fast}
   - {pin_num: A13, peripheral: ENET, signal: enet_tx_en, pin_signal: GPIO_B1_09, pull_keeper_enable: Disable, slew_rate: Fast}
-  - {pin_num: G13, peripheral: GPIO1, signal: 'gpio_io, 10', pin_signal: GPIO_AD_B0_10}
-  - {pin_num: F14, peripheral: GPIO1, signal: 'gpio_io, 09', pin_signal: GPIO_AD_B0_09}
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS ***********
  */
 
@@ -560,8 +564,6 @@ BOARD_InitENET:
 void BOARD_InitENET(void) {
   CLOCK_EnableClock(kCLOCK_Iomuxc);           
 
-  IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B0_09_GPIO1_IO09, 0U); 
-  IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B0_10_GPIO1_IO10, 0U); 
   IOMUXC_SetPinMux(IOMUXC_GPIO_B1_04_ENET_RX_DATA00, 0U); 
   IOMUXC_SetPinMux(IOMUXC_GPIO_B1_05_ENET_RX_DATA01, 0U); 
   IOMUXC_SetPinMux(IOMUXC_GPIO_B1_06_ENET_RX_EN, 0U); 
@@ -581,14 +583,14 @@ void BOARD_InitENET(void) {
   IOMUXC_SetPinConfig(IOMUXC_GPIO_B1_10_ENET_REF_CLK, 0xB1U); 
   IOMUXC_SetPinConfig(IOMUXC_GPIO_B1_11_ENET_RX_ER, 0xB1U); 
   IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_40_ENET_MDC, 0xB1U); 
-  IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_41_SEMC_CSX00, 0xB1U); 
+  IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_41_ENET_MDIO, 0xB1U); 
 }
 
 
 /*
  * TEXT BELOW IS USED AS SETTING FOR TOOLS *************************************
 BOARD_InitUSDHC:
-- options: {callFromInitBoot: 'false', coreID: core0, enableClock: 'true'}
+- options: {callFromInitBoot: 'true', coreID: core0, enableClock: 'true'}
 - pin_list:
   - {pin_num: J2, peripheral: USDHC1, signal: 'usdhc_data, 3', pin_signal: GPIO_SD_B0_05, pull_up_down_config: Pull_Up_47K_Ohm, pull_keeper_select: Pull, pull_keeper_enable: Enable,
     speed: MHZ_200, drive_strength: R0, slew_rate: Fast}
@@ -601,7 +603,6 @@ BOARD_InitUSDHC:
   - {pin_num: J4, peripheral: USDHC1, signal: usdhc_cmd, pin_signal: GPIO_SD_B0_00, pull_up_down_config: Pull_Up_47K_Ohm, pull_keeper_select: Pull, speed: MHZ_200,
     drive_strength: R0, slew_rate: Fast}
   - {pin_num: J3, peripheral: USDHC1, signal: usdhc_clk, pin_signal: GPIO_SD_B0_01, pull_keeper_enable: Disable, speed: MHZ_200, drive_strength: R0, slew_rate: Fast}
-  - {pin_num: D13, peripheral: GPIO2, signal: 'gpio_io, 28', pin_signal: GPIO_B1_12}
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS ***********
  */
 
@@ -614,7 +615,6 @@ BOARD_InitUSDHC:
 void BOARD_InitUSDHC(void) {
   CLOCK_EnableClock(kCLOCK_Iomuxc);           
 
-  IOMUXC_SetPinMux(IOMUXC_GPIO_B1_12_GPIO2_IO28, 0U); 
   IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B0_00_USDHC1_CMD, 0U); 
   IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B0_01_USDHC1_CLK, 0U); 
   IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B0_02_USDHC1_DATA0, 0U); 
@@ -676,26 +676,50 @@ void BOARD_InitHyperFlash(void) {
 
 /*
  * TEXT BELOW IS USED AS SETTING FOR TOOLS *************************************
-BOARD_InitLED:
+BOARD_InitARDUINO_UART:
 - options: {callFromInitBoot: 'true', coreID: core0, enableClock: 'true'}
 - pin_list:
-  - {pin_num: F14, peripheral: GPIO1, signal: 'gpio_io, 09', pin_signal: GPIO_AD_B0_09, direction: OUTPUT, open_drain: Enable}
+  - {pin_num: J12, peripheral: LPUART3, signal: TX, pin_signal: GPIO_AD_B1_06}
+  - {pin_num: K10, peripheral: LPUART3, signal: RX, pin_signal: GPIO_AD_B1_07}
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS ***********
  */
 
 /* FUNCTION ************************************************************************************************************
  *
- * Function Name : BOARD_InitLED
+ * Function Name : BOARD_InitARDUINO_UART
+ * Description   : Configures pin routing and optionally pin electrical features.
+ *
+ * END ****************************************************************************************************************/
+void BOARD_InitARDUINO_UART(void) {
+  CLOCK_EnableClock(kCLOCK_Iomuxc);           
+
+  IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B1_06_LPUART3_TX, 0U); 
+  IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B1_07_LPUART3_RX, 0U); 
+}
+
+
+/*
+ * TEXT BELOW IS USED AS SETTING FOR TOOLS *************************************
+BOARD_InitUSER_LED:
+- options: {callFromInitBoot: 'true', coreID: core0, enableClock: 'true'}
+- pin_list:
+  - {pin_num: F14, peripheral: GPIO1, signal: 'gpio_io, 09', pin_signal: GPIO_AD_B0_09, direction: OUTPUT, gpio_init_state: 'true', open_drain: Enable}
+ * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS ***********
+ */
+
+/* FUNCTION ************************************************************************************************************
+ *
+ * Function Name : BOARD_InitUSER_LED
  * Description   : Configures pin routing and optionally pin electrical features for LED.
  *
  * END ****************************************************************************************************************/
-void BOARD_InitLED(void) {
+void BOARD_InitUSER_LED(void) {
   CLOCK_EnableClock(kCLOCK_Iomuxc);           
 
   /* GPIO configuration of USER_LED on GPIO_AD_B0_09 (pin F14) */
   gpio_pin_config_t USER_LED_config = {
       .direction = kGPIO_DigitalOutput,
-      .outputLogic = 0U,
+      .outputLogic = 1U,
       .interruptMode = kGPIO_NoIntmode
   };
   /* Initialize GPIO functionality on GPIO_AD_B0_09 (pin F14) */
@@ -708,7 +732,7 @@ void BOARD_InitLED(void) {
 
 /*
  * TEXT BELOW IS USED AS SETTING FOR TOOLS *************************************
-BOARD_InitButtons:
+BOARD_InitUSER_BUTTON:
 - options: {callFromInitBoot: 'true', coreID: core0, enableClock: 'true'}
 - pin_list:
   - {pin_num: L6, peripheral: GPIO5, signal: 'gpio_io, 00', pin_signal: WAKEUP}
@@ -717,14 +741,40 @@ BOARD_InitButtons:
 
 /* FUNCTION ************************************************************************************************************
  *
- * Function Name : BOARD_InitButtons
+ * Function Name : BOARD_InitUSER_BUTTON
  * Description   : Configures pin routing and optionally pin electrical features for Buttons.
  *
  * END ****************************************************************************************************************/
-void BOARD_InitButtons(void) {
+void BOARD_InitUSER_BUTTON(void) {
   CLOCK_EnableClock(kCLOCK_IomuxcSnvs);       
 
   IOMUXC_SetPinMux(IOMUXC_SNVS_WAKEUP_GPIO5_IO00, 0U); 
+}
+
+
+/*
+ * TEXT BELOW IS USED AS SETTING FOR TOOLS *************************************
+BOARD_InitI2C:
+- options: {callFromInitBoot: 'true', coreID: core0, enableClock: 'true'}
+- pin_list:
+  - {pin_num: J11, peripheral: LPI2C1, signal: SCL, pin_signal: GPIO_AD_B1_00, identifier: I2C_SCL_FXOS8700CQ, software_input_on: Enable, open_drain: Enable}
+  - {pin_num: K11, peripheral: LPI2C1, signal: SDA, pin_signal: GPIO_AD_B1_01, identifier: I2C_SDA_FXOS8700CQ, software_input_on: Enable, open_drain: Enable}
+ * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS ***********
+ */
+
+/* FUNCTION ************************************************************************************************************
+ *
+ * Function Name : BOARD_InitI2C
+ * Description   : Configures pin routing and optionally pin electrical features.
+ *
+ * END ****************************************************************************************************************/
+void BOARD_InitI2C(void) {
+  CLOCK_EnableClock(kCLOCK_Iomuxc);           
+
+  IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B1_00_LPI2C1_SCL, 1U); 
+  IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B1_01_LPI2C1_SDA, 1U); 
+  IOMUXC_SetPinConfig(IOMUXC_GPIO_AD_B1_00_LPI2C1_SCL, 0x18B0U); 
+  IOMUXC_SetPinConfig(IOMUXC_GPIO_AD_B1_01_LPI2C1_SDA, 0x18B0U); 
 }
 
 /***********************************************************************************************************************

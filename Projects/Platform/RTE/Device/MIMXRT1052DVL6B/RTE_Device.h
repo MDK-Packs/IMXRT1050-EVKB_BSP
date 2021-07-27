@@ -11,6 +11,7 @@
 #define _RTE_DEVICE_H
 
 #include "pin_mux.h"
+#include "main.h"
 
 /* UART Select, UART0 - UART5. */
 /* User needs to provide the implementation of LPUARTX_GetFreq/LPUARTX_InitPins/LPUARTX_DeinitPins for the enabled
@@ -19,7 +20,7 @@
 #define RTE_USART1_DMA_EN 1
 #define RTE_USART2        0
 #define RTE_USART2_DMA_EN 0
-#define RTE_USART3        1
+#define RTE_USART3        0
 #define RTE_USART3_DMA_EN 0
 #define RTE_USART4        0
 #define RTE_USART4_DMA_EN 0

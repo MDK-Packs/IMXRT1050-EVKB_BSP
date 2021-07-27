@@ -16,8 +16,8 @@
         <TargetCommonOption>
           <Device>MIMXRT1052DVL6B</Device>
           <Vendor>NXP</Vendor>
-          <PackID>NXP.MIMXRT1052_DFP.13.1.0</PackID>
-          <PackURL>https://mcuxpresso.nxp.com/cmsis_pack/repo/</PackURL>
+          <PackID>NXP.MIMXRT1052_DFP.12.3.0</PackID>
+          <PackURL>http://mcuxpresso.nxp.com/cmsis_pack/repo/</PackURL>
           <Cpu>IRAM(0x20000000,0x020000) IRAM2(0x00000000,0x020000) XRAM(0x20200000,0x040000) CPUTYPE("Cortex-M7") FPU3(DFPU) CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -49,7 +49,7 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>.\Objects\</OutputDirectory>
-          <OutputName>Blinky</OutputName>
+          <OutputName>image</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>0</CreateHexFile>
@@ -337,9 +337,9 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>SKIP_SYSCLK_INIT, XIP_EXTERNAL_FLASH=1, XIP_BOOT_HEADER_ENABLE=1, XIP_BOOT_HEADER_DCD_ENABLE=1</Define>
+              <Define>SDK_I2C_BASED_COMPONENT_USED, SKIP_SYSCLK_INIT, XIP_EXTERNAL_FLASH=1, XIP_BOOT_HEADER_ENABLE=1, XIP_BOOT_HEADER_DCD_ENABLE=1</Define>
               <Undefine></Undefine>
-              <IncludePath></IncludePath>
+              <IncludePath>.</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -373,7 +373,7 @@
             <ScatterFile>.\RTE\Device\MIMXRT1052DVL6B\MIMXRT1052xxxxx_flexspi_nor.scf</ScatterFile>
             <IncludeLibs></IncludeLibs>
             <IncludeLibsPath></IncludeLibsPath>
-            <Misc>--remove --keep=*(.boot_hdr.ivt) --keep=*(.boot_hdr.boot_data) --keep=*(.boot_hdr.conf) --predefine="-DXIP_BOOT_HEADER_ENABLE=1"</Misc>
+            <Misc>--predefine="-DXIP_BOOT_HEADER_ENABLE=1"</Misc>
             <LinkerInputFile></LinkerInputFile>
             <DisabledWarnings>6314,6329</DisabledWarnings>
           </LDads>
@@ -411,7 +411,7 @@
             <File>
               <FileName>retarget_stdio.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\retarget_stdio.c</FilePath>
+              <FilePath>.\Board_IO\retarget_stdio.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -419,9 +419,9 @@
           <GroupName>MCUXpresso</GroupName>
           <Files>
             <File>
-              <FileName>EVKB-IMXRT1050.mex</FileName>
+              <FileName>IMXRT1050-EVKB.mex</FileName>
               <FileType>5</FileType>
-              <FilePath>.\EVKB-IMXRT1050.mex</FilePath>
+              <FilePath>.\IMXRT1050-EVKB.mex</FilePath>
             </File>
           </Files>
         </Group>
@@ -446,75 +446,6 @@
         </Group>
         <Group>
           <GroupName>::Compiler</GroupName>
-          <GroupOption>
-            <CommonProperty>
-              <UseCPPCompiler>0</UseCPPCompiler>
-              <RVCTCodeConst>0</RVCTCodeConst>
-              <RVCTZI>0</RVCTZI>
-              <RVCTOtherData>0</RVCTOtherData>
-              <ModuleSelection>0</ModuleSelection>
-              <IncludeInBuild>1</IncludeInBuild>
-              <AlwaysBuild>2</AlwaysBuild>
-              <GenerateAssemblyFile>2</GenerateAssemblyFile>
-              <AssembleAssemblyFile>2</AssembleAssemblyFile>
-              <PublicsOnly>2</PublicsOnly>
-              <StopOnExitCode>11</StopOnExitCode>
-              <CustomArgument></CustomArgument>
-              <IncludeLibraryModules></IncludeLibraryModules>
-              <ComprImg>1</ComprImg>
-            </CommonProperty>
-            <GroupArmAds>
-              <Cads>
-                <interw>2</interw>
-                <Optim>0</Optim>
-                <oTime>2</oTime>
-                <SplitLS>2</SplitLS>
-                <OneElfS>2</OneElfS>
-                <Strict>2</Strict>
-                <EnumInt>2</EnumInt>
-                <PlainCh>2</PlainCh>
-                <Ropi>2</Ropi>
-                <Rwpi>2</Rwpi>
-                <wLevel>0</wLevel>
-                <uThumb>2</uThumb>
-                <uSurpInc>2</uSurpInc>
-                <uC99>2</uC99>
-                <uGnu>2</uGnu>
-                <useXO>2</useXO>
-                <v6Lang>0</v6Lang>
-                <v6LangP>0</v6LangP>
-                <vShortEn>2</vShortEn>
-                <vShortWch>2</vShortWch>
-                <v6Lto>2</v6Lto>
-                <v6WtE>2</v6WtE>
-                <v6Rtti>2</v6Rtti>
-                <VariousControls>
-                  <MiscControls></MiscControls>
-                  <Define></Define>
-                  <Undefine></Undefine>
-                  <IncludePath></IncludePath>
-                </VariousControls>
-              </Cads>
-              <Aads>
-                <interw>2</interw>
-                <Ropi>2</Ropi>
-                <Rwpi>2</Rwpi>
-                <thumb>2</thumb>
-                <SplitLS>2</SplitLS>
-                <SwStkChk>2</SwStkChk>
-                <NoWarn>2</NoWarn>
-                <uSurpInc>2</uSurpInc>
-                <useXO>2</useXO>
-                <ClangAsOpt>0</ClangAsOpt>
-                <VariousControls>
-                  <MiscControls></MiscControls>
-                  <Define></Define>
-                  <Undefine></Undefine>
-                  <IncludePath></IncludePath>
-                </VariousControls>
-              </Aads>
-            </GroupArmAds>
-          </GroupOption>
         </Group>
         <Group>
           <GroupName>::Device</GroupName>
@@ -524,9 +455,49 @@
   </Targets>
 
   <RTE>
+    <packages>
+      <filter>
+        <targetInfos/>
+      </filter>
+      <package name="CMSIS-Driver" schemaVersion="1.4.9" url="http://www.keil.com/pack/" vendor="ARM" version="2.6.1">
+        <targetInfos>
+          <targetInfo name="IMXRT1050-EVKB"/>
+        </targetInfos>
+      </package>
+      <package name="CMSIS" schemaVersion="1.3" url="http://www.keil.com/pack/" vendor="ARM" version="5.8.0">
+        <targetInfos>
+          <targetInfo name="IMXRT1050-EVKB"/>
+        </targetInfos>
+      </package>
+      <package name="ARM_Compiler" schemaVersion="1.6.3" url="http://www.keil.com/pack/" vendor="Keil" version="1.6.3">
+        <targetInfos>
+          <targetInfo name="IMXRT1050-EVKB"/>
+        </targetInfos>
+      </package>
+      <package name="IMXRT1050-EVKB_BSP" schemaVersion="1.7.2" url="https://github.com/MDK-Packs/Pack/raw/master/IMXRT1050-EVKB_BSP/" vendor="Keil" version="1.0.0-dev0">
+        <targetInfos>
+          <targetInfo name="IMXRT1050-EVKB"/>
+        </targetInfos>
+      </package>
+      <package name="iMXRT105x_MWP" schemaVersion="1.7.1" url="http://www.keil.com/pack/" vendor="Keil" version="1.3.0">
+        <targetInfos>
+          <targetInfo name="IMXRT1050-EVKB" versionMatchMode="fixed"/>
+        </targetInfos>
+      </package>
+      <package name="EVKB-IMXRT1050_BSP" schemaVersion="1.4" url="http://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="12.3.0">
+        <targetInfos>
+          <targetInfo name="IMXRT1050-EVKB" versionMatchMode="fixed"/>
+        </targetInfos>
+      </package>
+      <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="http://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="12.3.0">
+        <targetInfos>
+          <targetInfo name="IMXRT1050-EVKB" versionMatchMode="fixed"/>
+        </targetInfos>
+      </package>
+    </packages>
     <boards>
-      <board Bname="EVKB-IMXRT1050" Bvendor="NXP" Bversion="">
-        <package name="EVKB-IMXRT1050_BSP" schemaVersion="1.4" url="https://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="13.1.0"/>
+      <board Bname="EVKB-IMXRT1050_MDK" Bvendor="NXP" Bversion="Rev.B">
+        <package name="EVKB-IMXRT1050_BSP" schemaVersion="1.7.2" url="https://github.com/MDK-Packs/Pack/raw/master/EVKB-IMXRT1050_BSP/" vendor="Keil" version="1.0.0-dev0"/>
         <targetInfos>
           <targetInfo name="IMXRT1050-EVKB"/>
         </targetInfos>
@@ -542,7 +513,11 @@
       <api Capiversion="2.2.0" Cclass="CMSIS Driver" Cgroup="Ethernet PHY" exclusive="0">
         <package name="CMSIS" schemaVersion="1.3" url="http://www.keil.com/pack/" vendor="ARM" version="5.8.0"/>
         <targetInfos>
-          <targetInfo name="IMXRT1050-EVKB"/>
+          <targetInfo name="IMXRT1050-EVKB">
+            <c>
+              <Define>ETH_PHY_REF_CLK_50M=1</Define>
+            </c>
+          </targetInfo>
         </targetInfos>
       </api>
       <api Capiversion="2.4.0" Cclass="CMSIS Driver" Cgroup="MCI" exclusive="0">
@@ -616,7 +591,11 @@
       <component Capiversion="2.0.0" Cclass="CMSIS Driver" Cgroup="Ethernet PHY" Csub="KSZ8081RNA" Cvendor="Keil" Cversion="6.3.0" condition="CMSIS Core">
         <package name="CMSIS-Driver" schemaVersion="1.4.9" url="http://www.keil.com/pack/" vendor="ARM" version="2.6.1"/>
         <targetInfos>
-          <targetInfo name="IMXRT1050-EVKB"/>
+          <targetInfo name="IMXRT1050-EVKB">
+            <c>
+              <Define>ETH_PHY_REF_CLK_50M=1</Define>
+            </c>
+          </targetInfo>
         </targetInfos>
       </component>
       <component Capiversion="2.2.0" Cclass="CMSIS Driver" Cgroup="MCI" Cvendor="Keil" Cversion="1.3.0" condition="MIMXRT105x CMSIS MCI">
@@ -626,237 +605,247 @@
         </targetInfos>
       </component>
       <component Capiversion="0.1.0" Cclass="CMSIS Driver" Cgroup="VIO" Csub="Board" Cvariant="IMXRT1050-EVKB" Cvendor="Keil" Cversion="1.0.0" condition="IMXRT1050-EVKB VIO">
-        <package name="IMXRT1050-EVKB_BSP" schemaVersion="1.7.1" url="https://github.com/MDK-Packs/Pack/raw/master/IMXRT1050-EVKB_BSP/" vendor="Keil" version="1.0.0"/>
+        <package name="IMXRT1050-EVKB_BSP" schemaVersion="1.7.2" url="https://github.com/MDK-Packs/Pack/raw/master/IMXRT1050-EVKB_BSP/" vendor="Keil" version="1.0.0-dev0"/>
         <targetInfos>
           <targetInfo name="IMXRT1050-EVKB"/>
         </targetInfos>
       </component>
-      <component Cclass="Board Support" Cgroup="SDK Drivers" Csub="evkbimxrt1050" Cvendor="NXP" Cversion="2.0.1" condition="device.MIMXRT1052_AND_driver.common">
-        <package name="EVKB-IMXRT1050_BSP" schemaVersion="1.4" url="https://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="13.1.0"/>
+      <component Cclass="Board Support" Cgroup="SDK Project Template" Csub="project_template" Cvariant="evkbimxrt1050" Cvendor="NXP" Cversion="1.0.0" condition="device.MIMXRT1052_AND___component.serial_manager_AND_utility.debug_console__OR_utility.debug_console_lite__AND_component.lpuart_adapter_AND_device.MIMXRT1052_startup_AND_driver.clock_AND_driver.common_AND_driver.igpio_AND_driver.iomuxc_AND_driver.lpuart_AND_driver.xip_board_AND_driver.xip_device">
+        <package name="EVKB-IMXRT1050_BSP" schemaVersion="1.4" url="http://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="12.3.0"/>
         <targetInfos>
           <targetInfo name="IMXRT1050-EVKB"/>
         </targetInfos>
       </component>
-      <component Cclass="Board Support" Cgroup="SDK Project Template" Csub="project_template" Cvariant="evkbimxrt1050" Cvendor="NXP" Cversion="1.0.0" condition="device.MIMXRT1052_AND___component.serial_manager_AND_utility.debug_console__OR_utility.debug_console_lite__AND_component.lpuart_adapter_AND_device.MIMXRT1052_startup_AND_driver.clock_AND_driver.common_AND_driver.igpio_AND_driver.iomuxc_AND_driver.lpuart_AND_driver.nic301_AND_driver.xip_board.evkbimxrt1050_AND_driver.xip_device">
-        <package name="EVKB-IMXRT1050_BSP" schemaVersion="1.4" url="https://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="13.1.0"/>
+      <component Cclass="CMSIS Driver" Cgroup="USART" Csub="lpuart_cmsis" Cvendor="NXP" Cversion="2.1.0" condition="device.MIMXRT1052_AND_CMSIS_Driver_Include.USART_AND_RTE_Device_AND_driver.lpuart">
+        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="http://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="12.3.0"/>
         <targetInfos>
           <targetInfo name="IMXRT1050-EVKB"/>
         </targetInfos>
       </component>
-      <component Capiversion="2.3.0" Cclass="CMSIS Driver" Cgroup="USART" Csub="lpuart_cmsis" Cvendor="NXP" Cversion="2.2.0" condition="device.MIMXRT1052_AND_CMSIS_Driver_Include.USART_AND_RTE_Device_AND_driver.lpuart_AND_driver.lpuart_edma">
-        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="https://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="13.1.0"/>
-        <targetInfos>
-          <targetInfo name="IMXRT1050-EVKB"/>
-        </targetInfos>
-      </component>
-      <component Cclass="Device" Cgroup="CMSIS" Csub="MIMXRT1052_header" Cvendor="NXP" Cversion="1.0.0" condition="device.MIMXRT1052_AND_CMSIS_Include_core_cm">
-        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="https://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="13.1.0"/>
+      <component Cclass="Device" Cgroup="CMSIS" Csub="MIMXRT1052_header" Cvendor="NXP" Cversion="1.0.0" condition="device.MIMXRT1052_AND_CMSIS_Include_core_cm7">
+        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="http://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="12.3.0"/>
         <targetInfos>
           <targetInfo name="IMXRT1050-EVKB"/>
         </targetInfos>
       </component>
       <component Cclass="Device" Cgroup="CMSIS" Csub="MIMXRT1052_system" Cvendor="NXP" Cversion="1.0.0" condition="device.MIMXRT1052_AND_device.MIMXRT1052_CMSIS">
-        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="https://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="13.1.0"/>
+        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="http://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="12.3.0"/>
         <targetInfos>
           <targetInfo name="IMXRT1050-EVKB"/>
         </targetInfos>
       </component>
       <component Cclass="Device" Cgroup="SDK Drivers" Csub="clock" Cvendor="NXP" Cversion="2.4.0" condition="device.MIMXRT1052_AND_driver.common">
-        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="https://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="13.1.0"/>
+        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="http://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="12.3.0"/>
         <targetInfos>
           <targetInfo name="IMXRT1050-EVKB"/>
         </targetInfos>
       </component>
-      <component Cclass="Device" Cgroup="SDK Drivers" Csub="common" Cvendor="NXP" Cversion="2.3.0" condition="device.MIMXRT1052_AND_device.MIMXRT1052_CMSIS_AND_driver.clock">
-        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="https://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="13.1.0"/>
+      <component Cclass="Device" Cgroup="SDK Drivers" Csub="common" Cvendor="NXP" Cversion="2.2.9" condition="device.MIMXRT1052_AND_device.MIMXRT1052_CMSIS_AND_driver.clock">
+        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="http://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="12.3.0"/>
         <targetInfos>
           <targetInfo name="IMXRT1050-EVKB"/>
         </targetInfos>
       </component>
       <component Cclass="Device" Cgroup="SDK Drivers" Csub="dmamux" Cvendor="NXP" Cversion="2.0.5" condition="device.MIMXRT1052_AND_driver.common">
-        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="https://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="13.1.0"/>
+        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="http://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="12.3.0"/>
         <targetInfos>
           <targetInfo name="IMXRT1050-EVKB"/>
         </targetInfos>
       </component>
-      <component Cclass="Device" Cgroup="SDK Drivers" Csub="edma" Cvendor="NXP" Cversion="2.4.2" condition="device.MIMXRT1052_AND_driver.common_AND_driver.dmamux">
-        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="https://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="13.1.0"/>
+      <component Cclass="Device" Cgroup="SDK Drivers" Csub="edma" Cvendor="NXP" Cversion="2.4.1" condition="device.MIMXRT1052_AND_driver.common_AND_driver.dmamux">
+        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="http://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="12.3.0"/>
         <targetInfos>
           <targetInfo name="IMXRT1050-EVKB"/>
         </targetInfos>
       </component>
-      <component Cclass="Device" Cgroup="SDK Drivers" Csub="enet" Cvendor="NXP" Cversion="2.5.0" condition="device.MIMXRT1052_AND_driver.common">
-        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="https://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="13.1.0"/>
+      <component Cclass="Device" Cgroup="SDK Drivers" Csub="enet" Cvendor="NXP" Cversion="2.3.4" condition="device.MIMXRT1052_AND_driver.common">
+        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="http://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="12.3.0"/>
+        <targetInfos>
+          <targetInfo name="IMXRT1050-EVKB"/>
+        </targetInfos>
+      </component>
+      <component Cclass="Device" Cgroup="SDK Drivers" Csub="fxos8700cq" Cvendor="NXP" Cversion="1.0.0" condition="device.MIMXRT1052_AND_driver.common">
+        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="http://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="12.3.0"/>
         <targetInfos>
           <targetInfo name="IMXRT1050-EVKB"/>
         </targetInfos>
       </component>
       <component Cclass="Device" Cgroup="SDK Drivers" Csub="gpio" Cvendor="NXP" Cversion="2.0.5" condition="device.MIMXRT1052_AND_driver.common">
-        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="https://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="13.1.0"/>
+        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="http://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="12.3.0"/>
+        <targetInfos>
+          <targetInfo name="IMXRT1050-EVKB"/>
+        </targetInfos>
+      </component>
+      <component Cclass="Device" Cgroup="SDK Drivers" Csub="i2c" Cvendor="NXP" Cversion="2.2.0" condition="device.MIMXRT1052_AND_driver.common">
+        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="http://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="12.3.0"/>
         <targetInfos>
           <targetInfo name="IMXRT1050-EVKB"/>
         </targetInfos>
       </component>
       <component Cclass="Device" Cgroup="SDK Drivers" Csub="iomuxc" Cvendor="NXP" Cversion="2.0.1" condition="device.MIMXRT1052_AND_driver.common">
-        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="https://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="13.1.0"/>
+        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="http://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="12.3.0"/>
         <targetInfos>
           <targetInfo name="IMXRT1050-EVKB"/>
         </targetInfos>
       </component>
       <component Cclass="Device" Cgroup="SDK Drivers" Csub="lists" Cvendor="NXP" Cversion="1.0.0" condition="device.MIMXRT1052_AND_driver.common">
-        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="https://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="13.1.0"/>
+        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="http://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="12.3.0"/>
         <targetInfos>
           <targetInfo name="IMXRT1050-EVKB"/>
         </targetInfos>
       </component>
-      <component Cclass="Device" Cgroup="SDK Drivers" Csub="lpuart" Cvendor="NXP" Cversion="2.5.1" condition="device.MIMXRT1052_AND_driver.common">
-        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="https://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="13.1.0"/>
+      <component Cclass="Device" Cgroup="SDK Drivers" Csub="lpuart" Cvendor="NXP" Cversion="2.4.1" condition="device.MIMXRT1052_AND_driver.common">
+        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="http://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="12.3.0"/>
         <targetInfos>
           <targetInfo name="IMXRT1050-EVKB"/>
         </targetInfos>
       </component>
       <component Cclass="Device" Cgroup="SDK Drivers" Csub="lpuart_adapter" Cvendor="NXP" Cversion="1.0.0" condition="device.MIMXRT1052_AND_driver.common_AND_driver.lpuart">
-        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="https://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="13.1.0"/>
+        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="http://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="12.3.0"/>
         <targetInfos>
           <targetInfo name="IMXRT1050-EVKB"/>
         </targetInfos>
       </component>
-      <component Cclass="Device" Cgroup="SDK Drivers" Csub="lpuart_edma" Cvendor="NXP" Cversion="2.5.0" condition="device.MIMXRT1052_AND_driver.edma_AND_driver.lpuart">
-        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="https://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="13.1.0"/>
+      <component Cclass="Device" Cgroup="SDK Drivers" Csub="lpuart_edma" Cvendor="NXP" Cversion="2.4.0" condition="device.MIMXRT1052_AND_driver.edma_AND_driver.lpuart">
+        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="http://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="12.3.0"/>
         <targetInfos>
           <targetInfo name="IMXRT1050-EVKB"/>
         </targetInfos>
       </component>
-      <component Cclass="Device" Cgroup="SDK Drivers" Csub="nic301" Cvendor="NXP" Cversion="2.0.0" condition="device.MIMXRT1052_AND_driver.common">
-        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="https://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="13.1.0"/>
+      <component Cclass="Device" Cgroup="SDK Drivers" Csub="sdhc" Cvendor="NXP" Cversion="2.7.0" condition="device.MIMXRT1052_AND_driver.common">
+        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="http://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="12.3.0"/>
         <targetInfos>
           <targetInfo name="IMXRT1050-EVKB"/>
         </targetInfos>
       </component>
-      <component Cclass="Device" Cgroup="SDK Drivers" Csub="sdhc" Cvendor="NXP" Cversion="2.8.0" condition="device.MIMXRT1052_AND_driver.common">
-        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="https://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="13.1.0"/>
+      <component Cclass="Device" Cgroup="SDK Drivers" Csub="xip_board" Cvendor="NXP" Cversion="2.0.1" condition="device.MIMXRT1052_AND_driver.common">
+        <package name="EVKB-IMXRT1050_BSP" schemaVersion="1.4" url="http://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="12.3.0"/>
         <targetInfos>
           <targetInfo name="IMXRT1050-EVKB"/>
         </targetInfos>
       </component>
       <component Cclass="Device" Cgroup="SDK Drivers" Csub="xip_device" Cvendor="NXP" Cversion="2.0.2" condition="device.MIMXRT1052_AND_driver.common">
-        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="https://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="13.1.0"/>
+        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="http://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="12.3.0"/>
         <targetInfos>
           <targetInfo name="IMXRT1050-EVKB"/>
         </targetInfos>
       </component>
       <component Cclass="Device" Cgroup="SDK Project Template" Csub="RTE_Device" Cvendor="NXP" Cversion="1.0.0" condition="device.MIMXRT1052_AND_driver.edma">
-        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="https://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="13.1.0"/>
+        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="http://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="12.3.0"/>
         <targetInfos>
           <targetInfo name="IMXRT1050-EVKB"/>
         </targetInfos>
       </component>
       <component Cclass="Device" Cgroup="SDK Utilities" Csub="debug_console" Cvendor="NXP" Cversion="1.0.0" condition="device.MIMXRT1052_AND_component.serial_manager_AND_driver.common">
-        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="https://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="13.1.0"/>
+        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="http://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="12.3.0"/>
         <targetInfos>
           <targetInfo name="IMXRT1050-EVKB">
             <c>
-              <Define>__MCUXPRESSO</Define>
+              <Define>SDK_DEBUGCONSOLE=1 __MCUXPRESSO</Define>
             </c>
           </targetInfo>
         </targetInfos>
       </component>
-      <component Cclass="Device" Cgroup="SDK Utilities" Csub="serial_manager" Cvendor="NXP" Cversion="1.0.1" condition="device.MIMXRT1052_AND__component.serial_manager_swo_OR_component.serial_manager_uart_OR_component.serial_manager_virtual__AND_component.lists_AND_driver.common">
-        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="https://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="13.1.0"/>
+      <component Cclass="Device" Cgroup="SDK Utilities" Csub="serial_manager" Cvendor="NXP" Cversion="1.0.0" condition="device.MIMXRT1052_AND__component.serial_manager_swo_OR_component.serial_manager_uart_OR_component.serial_manager_virtual__AND_component.lists_AND_driver.common">
+        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="http://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="12.3.0"/>
         <targetInfos>
           <targetInfo name="IMXRT1050-EVKB"/>
         </targetInfos>
       </component>
       <component Cclass="Device" Cgroup="SDK Utilities" Csub="serial_manager_uart" Cvendor="NXP" Cversion="1.0.0" condition="device.MIMXRT1052_AND_component.lpuart_adapter_AND_component.serial_manager_AND_driver.lpuart">
-        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="https://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="13.1.0"/>
+        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="http://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="12.3.0"/>
         <targetInfos>
           <targetInfo name="IMXRT1050-EVKB"/>
         </targetInfos>
       </component>
-      <component Cclass="Device" Cgroup="Startup" Cvendor="NXP" Cversion="1.1.0" condition="device.MIMXRT1052_AND__armclang_OR_iar__AND_device.MIMXRT1052_system">
-        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="https://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="13.1.0"/>
+      <component Cclass="Device" Cgroup="Startup" Csub="MIMXRT1052_startup" Cvendor="NXP" Cversion="1.1.0" condition="device.MIMXRT1052_AND__armclang_OR_iar__AND_device.MIMXRT1052_system">
+        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="http://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="12.3.0"/>
         <targetInfos>
-          <targetInfo name="IMXRT1050-EVKB"/>
+          <targetInfo name="IMXRT1050-EVKB">
+            <asm>
+              <ClangAsmOpt>2</ClangAsmOpt>
+            </asm>
+          </targetInfo>
         </targetInfos>
       </component>
     </components>
     <files>
       <file attr="config" category="sourceC" name="project_template\board.c" version="1.0.0">
         <instance index="0">RTE\Board_Support\MIMXRT1052DVL6B\board.c</instance>
-        <component Cclass="Board Support" Cgroup="SDK Project Template" Csub="project_template" Cvariant="evkbimxrt1050" Cvendor="NXP" Cversion="1.0.0" condition="device.MIMXRT1052_AND___component.serial_manager_AND_utility.debug_console__OR_utility.debug_console_lite__AND_component.lpuart_adapter_AND_device.MIMXRT1052_startup_AND_driver.clock_AND_driver.common_AND_driver.igpio_AND_driver.iomuxc_AND_driver.lpuart_AND_driver.nic301_AND_driver.xip_board.evkbimxrt1050_AND_driver.xip_device"/>
-        <package name="EVKB-IMXRT1050_BSP" schemaVersion="1.4" url="https://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="13.1.0"/>
+        <component Cclass="Board Support" Cgroup="SDK Project Template" Csub="project_template" Cvariant="evkbimxrt1050" Cvendor="NXP" Cversion="1.0.0" condition="device.MIMXRT1052_AND___component.serial_manager_AND_utility.debug_console__OR_utility.debug_console_lite__AND_component.lpuart_adapter_AND_device.MIMXRT1052_startup_AND_driver.clock_AND_driver.common_AND_driver.igpio_AND_driver.iomuxc_AND_driver.lpuart_AND_driver.xip_board_AND_driver.xip_device"/>
+        <package name="EVKB-IMXRT1050_BSP" schemaVersion="1.4" url="http://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="12.3.0"/>
         <targetInfos>
           <targetInfo name="IMXRT1050-EVKB"/>
         </targetInfos>
       </file>
       <file attr="config" category="header" name="project_template\board.h" version="1.0.0">
         <instance index="0">RTE\Board_Support\MIMXRT1052DVL6B\board.h</instance>
-        <component Cclass="Board Support" Cgroup="SDK Project Template" Csub="project_template" Cvariant="evkbimxrt1050" Cvendor="NXP" Cversion="1.0.0" condition="device.MIMXRT1052_AND___component.serial_manager_AND_utility.debug_console__OR_utility.debug_console_lite__AND_component.lpuart_adapter_AND_device.MIMXRT1052_startup_AND_driver.clock_AND_driver.common_AND_driver.igpio_AND_driver.iomuxc_AND_driver.lpuart_AND_driver.nic301_AND_driver.xip_board.evkbimxrt1050_AND_driver.xip_device"/>
-        <package name="EVKB-IMXRT1050_BSP" schemaVersion="1.4" url="https://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="13.1.0"/>
+        <component Cclass="Board Support" Cgroup="SDK Project Template" Csub="project_template" Cvariant="evkbimxrt1050" Cvendor="NXP" Cversion="1.0.0" condition="device.MIMXRT1052_AND___component.serial_manager_AND_utility.debug_console__OR_utility.debug_console_lite__AND_component.lpuart_adapter_AND_device.MIMXRT1052_startup_AND_driver.clock_AND_driver.common_AND_driver.igpio_AND_driver.iomuxc_AND_driver.lpuart_AND_driver.xip_board_AND_driver.xip_device"/>
+        <package name="EVKB-IMXRT1050_BSP" schemaVersion="1.4" url="http://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="12.3.0"/>
         <targetInfos>
           <targetInfo name="IMXRT1050-EVKB"/>
         </targetInfos>
       </file>
       <file attr="config" category="sourceC" name="project_template\clock_config.c" version="1.0.0">
         <instance index="0">RTE\Board_Support\MIMXRT1052DVL6B\clock_config.c</instance>
-        <component Cclass="Board Support" Cgroup="SDK Project Template" Csub="project_template" Cvariant="evkbimxrt1050" Cvendor="NXP" Cversion="1.0.0" condition="device.MIMXRT1052_AND___component.serial_manager_AND_utility.debug_console__OR_utility.debug_console_lite__AND_component.lpuart_adapter_AND_device.MIMXRT1052_startup_AND_driver.clock_AND_driver.common_AND_driver.igpio_AND_driver.iomuxc_AND_driver.lpuart_AND_driver.nic301_AND_driver.xip_board.evkbimxrt1050_AND_driver.xip_device"/>
-        <package name="EVKB-IMXRT1050_BSP" schemaVersion="1.4" url="https://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="13.1.0"/>
+        <component Cclass="Board Support" Cgroup="SDK Project Template" Csub="project_template" Cvariant="evkbimxrt1050" Cvendor="NXP" Cversion="1.0.0" condition="device.MIMXRT1052_AND___component.serial_manager_AND_utility.debug_console__OR_utility.debug_console_lite__AND_component.lpuart_adapter_AND_device.MIMXRT1052_startup_AND_driver.clock_AND_driver.common_AND_driver.igpio_AND_driver.iomuxc_AND_driver.lpuart_AND_driver.xip_board_AND_driver.xip_device"/>
+        <package name="EVKB-IMXRT1050_BSP" schemaVersion="1.4" url="http://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="12.3.0"/>
         <targetInfos>
           <targetInfo name="IMXRT1050-EVKB"/>
         </targetInfos>
       </file>
       <file attr="config" category="header" name="project_template\clock_config.h" version="1.0.0">
         <instance index="0">RTE\Board_Support\MIMXRT1052DVL6B\clock_config.h</instance>
-        <component Cclass="Board Support" Cgroup="SDK Project Template" Csub="project_template" Cvariant="evkbimxrt1050" Cvendor="NXP" Cversion="1.0.0" condition="device.MIMXRT1052_AND___component.serial_manager_AND_utility.debug_console__OR_utility.debug_console_lite__AND_component.lpuart_adapter_AND_device.MIMXRT1052_startup_AND_driver.clock_AND_driver.common_AND_driver.igpio_AND_driver.iomuxc_AND_driver.lpuart_AND_driver.nic301_AND_driver.xip_board.evkbimxrt1050_AND_driver.xip_device"/>
-        <package name="EVKB-IMXRT1050_BSP" schemaVersion="1.4" url="https://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="13.1.0"/>
+        <component Cclass="Board Support" Cgroup="SDK Project Template" Csub="project_template" Cvariant="evkbimxrt1050" Cvendor="NXP" Cversion="1.0.0" condition="device.MIMXRT1052_AND___component.serial_manager_AND_utility.debug_console__OR_utility.debug_console_lite__AND_component.lpuart_adapter_AND_device.MIMXRT1052_startup_AND_driver.clock_AND_driver.common_AND_driver.igpio_AND_driver.iomuxc_AND_driver.lpuart_AND_driver.xip_board_AND_driver.xip_device"/>
+        <package name="EVKB-IMXRT1050_BSP" schemaVersion="1.4" url="http://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="12.3.0"/>
         <targetInfos>
           <targetInfo name="IMXRT1050-EVKB"/>
         </targetInfos>
       </file>
       <file attr="config" category="sourceC" name="project_template\dcd.c" version="1.0.0">
         <instance index="0">RTE\Board_Support\MIMXRT1052DVL6B\dcd.c</instance>
-        <component Cclass="Board Support" Cgroup="SDK Project Template" Csub="project_template" Cvariant="evkbimxrt1050" Cvendor="NXP" Cversion="1.0.0" condition="device.MIMXRT1052_AND___component.serial_manager_AND_utility.debug_console__OR_utility.debug_console_lite__AND_component.lpuart_adapter_AND_device.MIMXRT1052_startup_AND_driver.clock_AND_driver.common_AND_driver.igpio_AND_driver.iomuxc_AND_driver.lpuart_AND_driver.nic301_AND_driver.xip_board.evkbimxrt1050_AND_driver.xip_device"/>
-        <package name="EVKB-IMXRT1050_BSP" schemaVersion="1.4" url="https://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="13.1.0"/>
+        <component Cclass="Board Support" Cgroup="SDK Project Template" Csub="project_template" Cvariant="evkbimxrt1050" Cvendor="NXP" Cversion="1.0.0" condition="device.MIMXRT1052_AND___component.serial_manager_AND_utility.debug_console__OR_utility.debug_console_lite__AND_component.lpuart_adapter_AND_device.MIMXRT1052_startup_AND_driver.clock_AND_driver.common_AND_driver.igpio_AND_driver.iomuxc_AND_driver.lpuart_AND_driver.xip_board_AND_driver.xip_device"/>
+        <package name="EVKB-IMXRT1050_BSP" schemaVersion="1.4" url="http://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="12.3.0"/>
         <targetInfos>
           <targetInfo name="IMXRT1050-EVKB"/>
         </targetInfos>
       </file>
       <file attr="config" category="header" name="project_template\dcd.h" version="1.0.0">
         <instance index="0">RTE\Board_Support\MIMXRT1052DVL6B\dcd.h</instance>
-        <component Cclass="Board Support" Cgroup="SDK Project Template" Csub="project_template" Cvariant="evkbimxrt1050" Cvendor="NXP" Cversion="1.0.0" condition="device.MIMXRT1052_AND___component.serial_manager_AND_utility.debug_console__OR_utility.debug_console_lite__AND_component.lpuart_adapter_AND_device.MIMXRT1052_startup_AND_driver.clock_AND_driver.common_AND_driver.igpio_AND_driver.iomuxc_AND_driver.lpuart_AND_driver.nic301_AND_driver.xip_board.evkbimxrt1050_AND_driver.xip_device"/>
-        <package name="EVKB-IMXRT1050_BSP" schemaVersion="1.4" url="https://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="13.1.0"/>
+        <component Cclass="Board Support" Cgroup="SDK Project Template" Csub="project_template" Cvariant="evkbimxrt1050" Cvendor="NXP" Cversion="1.0.0" condition="device.MIMXRT1052_AND___component.serial_manager_AND_utility.debug_console__OR_utility.debug_console_lite__AND_component.lpuart_adapter_AND_device.MIMXRT1052_startup_AND_driver.clock_AND_driver.common_AND_driver.igpio_AND_driver.iomuxc_AND_driver.lpuart_AND_driver.xip_board_AND_driver.xip_device"/>
+        <package name="EVKB-IMXRT1050_BSP" schemaVersion="1.4" url="http://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="12.3.0"/>
         <targetInfos>
           <targetInfo name="IMXRT1050-EVKB"/>
         </targetInfos>
       </file>
       <file attr="config" category="sourceC" name="project_template\peripherals.c" version="1.0.0">
         <instance index="0">RTE\Board_Support\MIMXRT1052DVL6B\peripherals.c</instance>
-        <component Cclass="Board Support" Cgroup="SDK Project Template" Csub="project_template" Cvariant="evkbimxrt1050" Cvendor="NXP" Cversion="1.0.0" condition="device.MIMXRT1052_AND___component.serial_manager_AND_utility.debug_console__OR_utility.debug_console_lite__AND_component.lpuart_adapter_AND_device.MIMXRT1052_startup_AND_driver.clock_AND_driver.common_AND_driver.igpio_AND_driver.iomuxc_AND_driver.lpuart_AND_driver.nic301_AND_driver.xip_board.evkbimxrt1050_AND_driver.xip_device"/>
-        <package name="EVKB-IMXRT1050_BSP" schemaVersion="1.4" url="https://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="13.1.0"/>
+        <component Cclass="Board Support" Cgroup="SDK Project Template" Csub="project_template" Cvariant="evkbimxrt1050" Cvendor="NXP" Cversion="1.0.0" condition="device.MIMXRT1052_AND___component.serial_manager_AND_utility.debug_console__OR_utility.debug_console_lite__AND_component.lpuart_adapter_AND_device.MIMXRT1052_startup_AND_driver.clock_AND_driver.common_AND_driver.igpio_AND_driver.iomuxc_AND_driver.lpuart_AND_driver.xip_board_AND_driver.xip_device"/>
+        <package name="EVKB-IMXRT1050_BSP" schemaVersion="1.4" url="http://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="12.3.0"/>
         <targetInfos>
           <targetInfo name="IMXRT1050-EVKB"/>
         </targetInfos>
       </file>
       <file attr="config" category="header" name="project_template\peripherals.h" version="1.0.0">
         <instance index="0">RTE\Board_Support\MIMXRT1052DVL6B\peripherals.h</instance>
-        <component Cclass="Board Support" Cgroup="SDK Project Template" Csub="project_template" Cvariant="evkbimxrt1050" Cvendor="NXP" Cversion="1.0.0" condition="device.MIMXRT1052_AND___component.serial_manager_AND_utility.debug_console__OR_utility.debug_console_lite__AND_component.lpuart_adapter_AND_device.MIMXRT1052_startup_AND_driver.clock_AND_driver.common_AND_driver.igpio_AND_driver.iomuxc_AND_driver.lpuart_AND_driver.nic301_AND_driver.xip_board.evkbimxrt1050_AND_driver.xip_device"/>
-        <package name="EVKB-IMXRT1050_BSP" schemaVersion="1.4" url="https://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="13.1.0"/>
+        <component Cclass="Board Support" Cgroup="SDK Project Template" Csub="project_template" Cvariant="evkbimxrt1050" Cvendor="NXP" Cversion="1.0.0" condition="device.MIMXRT1052_AND___component.serial_manager_AND_utility.debug_console__OR_utility.debug_console_lite__AND_component.lpuart_adapter_AND_device.MIMXRT1052_startup_AND_driver.clock_AND_driver.common_AND_driver.igpio_AND_driver.iomuxc_AND_driver.lpuart_AND_driver.xip_board_AND_driver.xip_device"/>
+        <package name="EVKB-IMXRT1050_BSP" schemaVersion="1.4" url="http://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="12.3.0"/>
         <targetInfos>
           <targetInfo name="IMXRT1050-EVKB"/>
         </targetInfos>
       </file>
       <file attr="config" category="sourceC" name="project_template\pin_mux.c" version="1.0.0">
         <instance index="0">RTE\Board_Support\MIMXRT1052DVL6B\pin_mux.c</instance>
-        <component Cclass="Board Support" Cgroup="SDK Project Template" Csub="project_template" Cvariant="evkbimxrt1050" Cvendor="NXP" Cversion="1.0.0" condition="device.MIMXRT1052_AND___component.serial_manager_AND_utility.debug_console__OR_utility.debug_console_lite__AND_component.lpuart_adapter_AND_device.MIMXRT1052_startup_AND_driver.clock_AND_driver.common_AND_driver.igpio_AND_driver.iomuxc_AND_driver.lpuart_AND_driver.nic301_AND_driver.xip_board.evkbimxrt1050_AND_driver.xip_device"/>
-        <package name="EVKB-IMXRT1050_BSP" schemaVersion="1.4" url="https://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="13.1.0"/>
+        <component Cclass="Board Support" Cgroup="SDK Project Template" Csub="project_template" Cvariant="evkbimxrt1050" Cvendor="NXP" Cversion="1.0.0" condition="device.MIMXRT1052_AND___component.serial_manager_AND_utility.debug_console__OR_utility.debug_console_lite__AND_component.lpuart_adapter_AND_device.MIMXRT1052_startup_AND_driver.clock_AND_driver.common_AND_driver.igpio_AND_driver.iomuxc_AND_driver.lpuart_AND_driver.xip_board_AND_driver.xip_device"/>
+        <package name="EVKB-IMXRT1050_BSP" schemaVersion="1.4" url="http://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="12.3.0"/>
         <targetInfos>
           <targetInfo name="IMXRT1050-EVKB"/>
         </targetInfos>
       </file>
       <file attr="config" category="header" name="project_template\pin_mux.h" version="1.0.0">
         <instance index="0">RTE\Board_Support\MIMXRT1052DVL6B\pin_mux.h</instance>
-        <component Cclass="Board Support" Cgroup="SDK Project Template" Csub="project_template" Cvariant="evkbimxrt1050" Cvendor="NXP" Cversion="1.0.0" condition="device.MIMXRT1052_AND___component.serial_manager_AND_utility.debug_console__OR_utility.debug_console_lite__AND_component.lpuart_adapter_AND_device.MIMXRT1052_startup_AND_driver.clock_AND_driver.common_AND_driver.igpio_AND_driver.iomuxc_AND_driver.lpuart_AND_driver.nic301_AND_driver.xip_board.evkbimxrt1050_AND_driver.xip_device"/>
-        <package name="EVKB-IMXRT1050_BSP" schemaVersion="1.4" url="https://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="13.1.0"/>
+        <component Cclass="Board Support" Cgroup="SDK Project Template" Csub="project_template" Cvariant="evkbimxrt1050" Cvendor="NXP" Cversion="1.0.0" condition="device.MIMXRT1052_AND___component.serial_manager_AND_utility.debug_console__OR_utility.debug_console_lite__AND_component.lpuart_adapter_AND_device.MIMXRT1052_startup_AND_driver.clock_AND_driver.common_AND_driver.igpio_AND_driver.iomuxc_AND_driver.lpuart_AND_driver.xip_board_AND_driver.xip_device"/>
+        <package name="EVKB-IMXRT1050_BSP" schemaVersion="1.4" url="http://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="12.3.0"/>
         <targetInfos>
           <targetInfo name="IMXRT1050-EVKB"/>
         </targetInfos>
@@ -887,40 +876,40 @@
       </file>
       <file attr="config" category="linkerScript" condition="mdk" name="arm\MIMXRT1052xxxxx_flexspi_nor.scf" version="1.1.0">
         <instance index="0">RTE\Device\MIMXRT1052DVL6B\MIMXRT1052xxxxx_flexspi_nor.scf</instance>
-        <component Cclass="Device" Cgroup="Startup" Cvendor="NXP" Cversion="1.1.0" condition="device.MIMXRT1052_AND__armclang_OR_iar__AND_device.MIMXRT1052_system"/>
-        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="https://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="13.1.0"/>
+        <component Cclass="Device" Cgroup="Startup" Csub="MIMXRT1052_startup" Cvendor="NXP" Cversion="1.1.0" condition="device.MIMXRT1052_AND__armclang_OR_iar__AND_device.MIMXRT1052_system"/>
+        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="http://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="12.3.0"/>
         <targetInfos>
           <targetInfo name="IMXRT1050-EVKB"/>
         </targetInfos>
       </file>
       <file attr="config" category="linkerScript" condition="mdk" name="arm\MIMXRT1052xxxxx_flexspi_nor_sdram.scf" version="1.1.0">
         <instance index="0">RTE\Device\MIMXRT1052DVL6B\MIMXRT1052xxxxx_flexspi_nor_sdram.scf</instance>
-        <component Cclass="Device" Cgroup="Startup" Cvendor="NXP" Cversion="1.1.0" condition="device.MIMXRT1052_AND__armclang_OR_iar__AND_device.MIMXRT1052_system"/>
-        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="https://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="13.1.0"/>
+        <component Cclass="Device" Cgroup="Startup" Csub="MIMXRT1052_startup" Cvendor="NXP" Cversion="1.1.0" condition="device.MIMXRT1052_AND__armclang_OR_iar__AND_device.MIMXRT1052_system"/>
+        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="http://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="12.3.0"/>
         <targetInfos>
           <targetInfo name="IMXRT1050-EVKB"/>
         </targetInfos>
       </file>
       <file attr="config" category="linkerScript" condition="mdk" name="arm\MIMXRT1052xxxxx_ram.scf" version="1.1.0">
         <instance index="0">RTE\Device\MIMXRT1052DVL6B\MIMXRT1052xxxxx_ram.scf</instance>
-        <component Cclass="Device" Cgroup="Startup" Cvendor="NXP" Cversion="1.1.0" condition="device.MIMXRT1052_AND__armclang_OR_iar__AND_device.MIMXRT1052_system"/>
-        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="https://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="13.1.0"/>
+        <component Cclass="Device" Cgroup="Startup" Csub="MIMXRT1052_startup" Cvendor="NXP" Cversion="1.1.0" condition="device.MIMXRT1052_AND__armclang_OR_iar__AND_device.MIMXRT1052_system"/>
+        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="http://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="12.3.0"/>
         <targetInfos>
           <targetInfo name="IMXRT1050-EVKB"/>
         </targetInfos>
       </file>
       <file attr="config" category="linkerScript" condition="mdk" name="arm\MIMXRT1052xxxxx_sdram.scf" version="1.1.0">
         <instance index="0">RTE\Device\MIMXRT1052DVL6B\MIMXRT1052xxxxx_sdram.scf</instance>
-        <component Cclass="Device" Cgroup="Startup" Cvendor="NXP" Cversion="1.1.0" condition="device.MIMXRT1052_AND__armclang_OR_iar__AND_device.MIMXRT1052_system"/>
-        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="https://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="13.1.0"/>
+        <component Cclass="Device" Cgroup="Startup" Csub="MIMXRT1052_startup" Cvendor="NXP" Cversion="1.1.0" condition="device.MIMXRT1052_AND__armclang_OR_iar__AND_device.MIMXRT1052_system"/>
+        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="http://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="12.3.0"/>
         <targetInfos>
           <targetInfo name="IMXRT1050-EVKB"/>
         </targetInfos>
       </file>
       <file attr="config" category="linkerScript" condition="mdk" name="arm\MIMXRT1052xxxxx_sdram_txt.scf" version="1.1.0">
         <instance index="0">RTE\Device\MIMXRT1052DVL6B\MIMXRT1052xxxxx_sdram_txt.scf</instance>
-        <component Cclass="Device" Cgroup="Startup" Cvendor="NXP" Cversion="1.1.0" condition="device.MIMXRT1052_AND__armclang_OR_iar__AND_device.MIMXRT1052_system"/>
-        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="https://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="13.1.0"/>
+        <component Cclass="Device" Cgroup="Startup" Csub="MIMXRT1052_startup" Cvendor="NXP" Cversion="1.1.0" condition="device.MIMXRT1052_AND__armclang_OR_iar__AND_device.MIMXRT1052_system"/>
+        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="http://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="12.3.0"/>
         <targetInfos>
           <targetInfo name="IMXRT1050-EVKB"/>
         </targetInfos>
@@ -928,15 +917,7 @@
       <file attr="config" category="header" name="template\RTE_Device.h" version="1.0.0">
         <instance index="0">RTE\Device\MIMXRT1052DVL6B\RTE_Device.h</instance>
         <component Cclass="Device" Cgroup="SDK Project Template" Csub="RTE_Device" Cvendor="NXP" Cversion="1.0.0" condition="device.MIMXRT1052_AND_driver.edma"/>
-        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="https://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="13.1.0"/>
-        <targetInfos>
-          <targetInfo name="IMXRT1050-EVKB"/>
-        </targetInfos>
-      </file>
-      <file attr="config" category="sourceAsm" condition="mdk" name="arm\startup_MIMXRT1052.S" version="1.1.0">
-        <instance index="0">RTE\Device\MIMXRT1052DVL6B\startup_MIMXRT1052.S</instance>
-        <component Cclass="Device" Cgroup="Startup" Cvendor="NXP" Cversion="1.1.0" condition="device.MIMXRT1052_AND__armclang_OR_iar__AND_device.MIMXRT1052_system"/>
-        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="https://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="13.1.0"/>
+        <package name="MIMXRT1052_DFP" schemaVersion="1.4" url="http://mcuxpresso.nxp.com/cmsis_pack/repo/" vendor="NXP" version="12.3.0"/>
         <targetInfos>
           <targetInfo name="IMXRT1050-EVKB"/>
         </targetInfos>
@@ -1010,12 +991,7 @@
       </LayAsnItem>
       <LayAsnItem>
         <LayAsnType>2</LayAsnType>
-        <LayAsnName>.\retarget_stdio.c</LayAsnName>
-        <LayAsnLayerName>Board</LayAsnLayerName>
-      </LayAsnItem>
-      <LayAsnItem>
-        <LayAsnType>2</LayAsnType>
-        <LayAsnName>.\EVKB-IMXRT1050.mex</LayAsnName>
+        <LayAsnName>.\Board_IO\retarget_stdio.c</LayAsnName>
         <LayAsnLayerName>Board</LayAsnLayerName>
       </LayAsnItem>
       <LayAsnItem>
@@ -1030,8 +1006,8 @@
       </LayAsnItem>
       <LayAsnItem>
         <LayAsnType>1</LayAsnType>
-        <LayAsnName>NXP::Board Support:SDK Drivers:evkbimxrt1050</LayAsnName>
-        <LayAsnLayerName>Board</LayAsnLayerName>
+        <LayAsnName>ARM::CMSIS:RTOS2:Keil RTX5</LayAsnName>
+        <LayAsnLayerName>RTOS</LayAsnLayerName>
       </LayAsnItem>
       <LayAsnItem>
         <LayAsnType>1</LayAsnType>
@@ -1040,17 +1016,12 @@
       </LayAsnItem>
       <LayAsnItem>
         <LayAsnType>1</LayAsnType>
-        <LayAsnName>ARM::CMSIS:RTOS2:Keil RTX5</LayAsnName>
-        <LayAsnLayerName>RTOS</LayAsnLayerName>
-      </LayAsnItem>
-      <LayAsnItem>
-        <LayAsnType>1</LayAsnType>
-        <LayAsnName>Keil::CMSIS Driver:Ethernet MAC</LayAsnName>
+        <LayAsnName>Keil::CMSIS Driver:Ethernet PHY:KSZ8081RNA</LayAsnName>
         <LayAsnLayerName>Board</LayAsnLayerName>
       </LayAsnItem>
       <LayAsnItem>
         <LayAsnType>1</LayAsnType>
-        <LayAsnName>Keil::CMSIS Driver:Ethernet PHY:KSZ8081RNA</LayAsnName>
+        <LayAsnName>Keil::CMSIS Driver:Ethernet MAC</LayAsnName>
         <LayAsnLayerName>Board</LayAsnLayerName>
       </LayAsnItem>
       <LayAsnItem>
@@ -1090,7 +1061,7 @@
       </LayAsnItem>
       <LayAsnItem>
         <LayAsnType>1</LayAsnType>
-        <LayAsnName>NXP::Device:Startup</LayAsnName>
+        <LayAsnName>NXP::Device:SDK Drivers:xip_board</LayAsnName>
         <LayAsnLayerName>Board</LayAsnLayerName>
       </LayAsnItem>
       <LayAsnItem>
@@ -1130,7 +1101,17 @@
       </LayAsnItem>
       <LayAsnItem>
         <LayAsnType>1</LayAsnType>
+        <LayAsnName>NXP::Device:SDK Drivers:fxos8700cq</LayAsnName>
+        <LayAsnLayerName>Board</LayAsnLayerName>
+      </LayAsnItem>
+      <LayAsnItem>
+        <LayAsnType>1</LayAsnType>
         <LayAsnName>NXP::Device:SDK Drivers:gpio</LayAsnName>
+        <LayAsnLayerName>Board</LayAsnLayerName>
+      </LayAsnItem>
+      <LayAsnItem>
+        <LayAsnType>1</LayAsnType>
+        <LayAsnName>NXP::Device:SDK Drivers:i2c</LayAsnName>
         <LayAsnLayerName>Board</LayAsnLayerName>
       </LayAsnItem>
       <LayAsnItem>
@@ -1156,11 +1137,6 @@
       <LayAsnItem>
         <LayAsnType>1</LayAsnType>
         <LayAsnName>NXP::Device:SDK Drivers:lpuart_edma</LayAsnName>
-        <LayAsnLayerName>Board</LayAsnLayerName>
-      </LayAsnItem>
-      <LayAsnItem>
-        <LayAsnType>1</LayAsnType>
-        <LayAsnName>NXP::Device:SDK Drivers:nic301</LayAsnName>
         <LayAsnLayerName>Board</LayAsnLayerName>
       </LayAsnItem>
       <LayAsnItem>
@@ -1191,6 +1167,16 @@
       <LayAsnItem>
         <LayAsnType>1</LayAsnType>
         <LayAsnName>NXP::Device:SDK Utilities:serial_manager_uart</LayAsnName>
+        <LayAsnLayerName>Board</LayAsnLayerName>
+      </LayAsnItem>
+      <LayAsnItem>
+        <LayAsnType>1</LayAsnType>
+        <LayAsnName>NXP::Device:Startup:MIMXRT1052_startup</LayAsnName>
+        <LayAsnLayerName>Board</LayAsnLayerName>
+      </LayAsnItem>
+      <LayAsnItem>
+        <LayAsnType>2</LayAsnType>
+        <LayAsnName>.\IMXRT1050-EVKB.mex</LayAsnName>
         <LayAsnLayerName>Board</LayAsnLayerName>
       </LayAsnItem>
     </LayAssign>

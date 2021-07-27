@@ -15,11 +15,11 @@
 
 /* TEXT BELOW IS USED AS SETTING FOR TOOLS *************************************
 !!GlobalInfo
-product: Clocks v7.0
+product: Clocks v8.0
 processor: MIMXRT1052xxxxB
 package_id: MIMXRT1052DVL6B
 mcu_data: ksdk2_0
-processor_version: 9.0.0
+processor_version: 10.0.0
 board: IMXRT1050-EVKB
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS **********/
 
@@ -58,9 +58,8 @@ outputs:
 - {id: CLK_1M.outFreq, value: 1 MHz}
 - {id: CLK_24M.outFreq, value: 24 MHz}
 - {id: CSI_CLK_ROOT.outFreq, value: 12 MHz}
-- {id: ENET1_TX_CLK.outFreq, value: 2.4 MHz}
-- {id: ENET_125M_CLK.outFreq, value: 2.4 MHz}
-- {id: ENET_25M_REF_CLK.outFreq, value: 1.2 MHz}
+- {id: ENET_125M_CLK.outFreq, value: 50 MHz}
+- {id: ENET_25M_REF_CLK.outFreq, value: 25 MHz}
 - {id: FLEXIO1_CLK_ROOT.outFreq, value: 30 MHz}
 - {id: FLEXIO2_CLK_ROOT.outFreq, value: 30 MHz}
 - {id: FLEXSPI_CLK_ROOT.outFreq, value: 160 MHz}
@@ -123,7 +122,7 @@ settings:
 - {id: CCM_ANALOG.PLL5.denom, value: '1'}
 - {id: CCM_ANALOG.PLL5.div, value: '40'}
 - {id: CCM_ANALOG.PLL5.num, value: '0'}
-- {id: CCM_ANALOG_PLL_ENET_POWERDOWN_CFG, value: 'Yes'}
+- {id: CCM_ANALOG.PLL6_BYPASS.sel, value: CCM_ANALOG.PLL6}
 - {id: CCM_ANALOG_PLL_USB1_POWER_CFG, value: 'Yes'}
 sources:
 - {id: XTALOSC24M.RTC_OSC.outFreq, value: 32.768 kHz, enabled: true}
@@ -147,6 +146,13 @@ const clock_sys_pll_config_t sysPllConfig_BOARD_BootClockRUN =
 const clock_usb_pll_config_t usb1PllConfig_BOARD_BootClockRUN =
     {
         .loopDivider = 0,                         /* PLL loop divider, Fout = Fin * 20 */
+        .src = 0,                                 /* Bypass clock source, 0 - OSC 24M, 1 - CLK1_P and CLK1_N */
+    };
+const clock_enet_pll_config_t enetPllConfig_BOARD_BootClockRUN =
+    {
+        .enableClkOutput = true,                  /* Enable the PLL providing the ENET 125MHz reference clock */
+        .enableClkOutput25M = true,               /* Enable the PLL providing the ENET 25MHz reference clock */
+        .loopDivider = 1,                         /* Set frequency of ethernet reference clock to 50 MHz */
         .src = 0,                                 /* Bypass clock source, 0 - OSC 24M, 1 - CLK1_P and CLK1_N */
     };
 /*******************************************************************************
@@ -402,16 +408,10 @@ void BOARD_BootClockRUN(void)
     CCM_ANALOG->MISC2 = (CCM_ANALOG->MISC2 & (~CCM_ANALOG_MISC2_VIDEO_DIV_MASK)) | CCM_ANALOG_MISC2_VIDEO_DIV(0);
     /* Enable Video PLL output. */
     CCM_ANALOG->PLL_VIDEO |= CCM_ANALOG_PLL_VIDEO_ENABLE_MASK;
-    /* DeInit Enet PLL. */
-    CLOCK_DeinitEnetPll();
-    /* Bypass Enet PLL. */
-    CLOCK_SetPllBypass(CCM_ANALOG, kCLOCK_PllEnet, 1);
-    /* Set Enet output divider. */
-    CCM_ANALOG->PLL_ENET = (CCM_ANALOG->PLL_ENET & (~CCM_ANALOG_PLL_ENET_DIV_SELECT_MASK)) | CCM_ANALOG_PLL_ENET_DIV_SELECT(1);
-    /* Enable Enet output. */
-    CCM_ANALOG->PLL_ENET |= CCM_ANALOG_PLL_ENET_ENABLE_MASK;
-    /* Enable Enet25M output. */
-    CCM_ANALOG->PLL_ENET |= CCM_ANALOG_PLL_ENET_ENET_25M_REF_EN_MASK;
+    /* Init Enet PLL. */
+    CLOCK_InitEnetPll(&enetPllConfig_BOARD_BootClockRUN);
+    /* Disable pfd offset. */
+    CCM_ANALOG->PLL_ENET &= ~CCM_ANALOG_PLL_ENET_PFD_OFFSET_EN_MASK;
     /* DeInit Usb2 PLL. */
     CLOCK_DeinitUsb2Pll();
     /* Bypass Usb2 PLL. */
@@ -454,8 +454,8 @@ void BOARD_BootClockRUN(void)
     IOMUXC_SetSaiMClkClockSource(IOMUXC_GPR, kIOMUXC_GPR_SAI3MClk3Sel, 0);
     /* Set MQS configuration. */
     IOMUXC_MQSConfig(IOMUXC_GPR,kIOMUXC_MqsPwmOverSampleRate32, 0);
-    /* Set ENET Tx clock source. */
-    IOMUXC_EnableMode(IOMUXC_GPR, kIOMUXC_GPR_ENET1RefClkMode, false);
+    /* Set ENET Ref clock source. */
+    IOMUXC_GPR->GPR1 &= ~IOMUXC_GPR_GPR1_ENET1_TX_CLK_DIR_MASK;
     /* Set GPT1 High frequency reference clock source. */
     IOMUXC_GPR->GPR5 &= ~IOMUXC_GPR_GPR5_VREF_1M_CLK_GPT1_MASK;
     /* Set GPT2 High frequency reference clock source. */

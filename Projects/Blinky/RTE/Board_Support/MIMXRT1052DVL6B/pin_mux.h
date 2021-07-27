@@ -763,45 +763,62 @@ void BOARD_InitHyperFlash(void);
 
 /* GPIO_AD_B0_09 (coord F14), JTAG_TDI/J21[5]/ENET_RST/J22[5] */
 /* Routed pin properties */
-#define BOARD_INITLED_USER_LED_PERIPHERAL                                  GPIO1   /*!< Peripheral name */
-#define BOARD_INITLED_USER_LED_SIGNAL                                    gpio_io   /*!< Signal name */
-#define BOARD_INITLED_USER_LED_CHANNEL                                        9U   /*!< Signal channel */
+#define BOARD_INITUSER_LED_USER_LED_PERIPHERAL                             GPIO1   /*!< Peripheral name */
+#define BOARD_INITUSER_LED_USER_LED_SIGNAL                               gpio_io   /*!< Signal name */
+#define BOARD_INITUSER_LED_USER_LED_CHANNEL                                   9U   /*!< Signal channel */
 
 /* Symbols to be used with GPIO driver */
-#define BOARD_INITLED_USER_LED_GPIO                                        GPIO1   /*!< GPIO peripheral base pointer */
-#define BOARD_INITLED_USER_LED_GPIO_PIN                                       9U   /*!< GPIO pin number */
-#define BOARD_INITLED_USER_LED_GPIO_PIN_MASK                          (1U << 9U)   /*!< GPIO pin mask */
-#define BOARD_INITLED_USER_LED_PORT                                        GPIO1   /*!< PORT peripheral base pointer */
-#define BOARD_INITLED_USER_LED_PIN                                            9U   /*!< PORT pin number */
-#define BOARD_INITLED_USER_LED_PIN_MASK                               (1U << 9U)   /*!< PORT pin mask */
+#define BOARD_INITUSER_LED_USER_LED_GPIO                                   GPIO1   /*!< GPIO peripheral base pointer */
+#define BOARD_INITUSER_LED_USER_LED_GPIO_PIN                                  9U   /*!< GPIO pin number */
+#define BOARD_INITUSER_LED_USER_LED_GPIO_PIN_MASK                     (1U << 9U)   /*!< GPIO pin mask */
+#define BOARD_INITUSER_LED_USER_LED_PORT                                   GPIO1   /*!< PORT peripheral base pointer */
+#define BOARD_INITUSER_LED_USER_LED_PIN                                       9U   /*!< PORT pin number */
+#define BOARD_INITUSER_LED_USER_LED_PIN_MASK                          (1U << 9U)   /*!< PORT pin mask */
 
 
 /*!
  * @brief Configures pin routing and optionally pin electrical features for LED.
  *
  */
-void BOARD_InitLED(void);
+void BOARD_InitUSER_LED(void);
 
 /* WAKEUP (coord L6), SD_PWREN */
 /* Routed pin properties */
-#define BOARD_INITBUTTONS_USER_BUTTON_PERIPHERAL                           GPIO5   /*!< Peripheral name */
-#define BOARD_INITBUTTONS_USER_BUTTON_SIGNAL                             gpio_io   /*!< Signal name */
-#define BOARD_INITBUTTONS_USER_BUTTON_CHANNEL                                 0U   /*!< Signal channel */
+#define BOARD_INITUSER_BUTTON_USER_BUTTON_PERIPHERAL                       GPIO5   /*!< Peripheral name */
+#define BOARD_INITUSER_BUTTON_USER_BUTTON_SIGNAL                         gpio_io   /*!< Signal name */
+#define BOARD_INITUSER_BUTTON_USER_BUTTON_CHANNEL                             0U   /*!< Signal channel */
 
 /* Symbols to be used with GPIO driver */
-#define BOARD_INITBUTTONS_USER_BUTTON_GPIO                                 GPIO5   /*!< GPIO peripheral base pointer */
-#define BOARD_INITBUTTONS_USER_BUTTON_GPIO_PIN                                0U   /*!< GPIO pin number */
-#define BOARD_INITBUTTONS_USER_BUTTON_GPIO_PIN_MASK                   (1U << 0U)   /*!< GPIO pin mask */
-#define BOARD_INITBUTTONS_USER_BUTTON_PORT                                 GPIO5   /*!< PORT peripheral base pointer */
-#define BOARD_INITBUTTONS_USER_BUTTON_PIN                                     0U   /*!< PORT pin number */
-#define BOARD_INITBUTTONS_USER_BUTTON_PIN_MASK                        (1U << 0U)   /*!< PORT pin mask */
+#define BOARD_INITUSER_BUTTON_USER_BUTTON_GPIO                             GPIO5   /*!< GPIO peripheral base pointer */
+#define BOARD_INITUSER_BUTTON_USER_BUTTON_GPIO_PIN                            0U   /*!< GPIO pin number */
+#define BOARD_INITUSER_BUTTON_USER_BUTTON_GPIO_PIN_MASK               (1U << 0U)   /*!< GPIO pin mask */
+#define BOARD_INITUSER_BUTTON_USER_BUTTON_PORT                             GPIO5   /*!< PORT peripheral base pointer */
+#define BOARD_INITUSER_BUTTON_USER_BUTTON_PIN                                 0U   /*!< PORT pin number */
+#define BOARD_INITUSER_BUTTON_USER_BUTTON_PIN_MASK                    (1U << 0U)   /*!< PORT pin mask */
 
 
 /*!
  * @brief Configures pin routing and optionally pin electrical features for Buttons.
  *
  */
-void BOARD_InitButtons(void);
+void BOARD_InitUSER_BUTTON(void);
+
+/* GPIO_AD_B1_00 (coord J11), I2C1_SCL/CSI_I2C_SCL/J35[20]/J23[6]/U13[17]/U32[4] */
+/* Routed pin properties */
+#define BOARD_INITI2C_I2C_SCL_FXOS8700CQ_PERIPHERAL                       LPI2C1   /*!< Peripheral name */
+#define BOARD_INITI2C_I2C_SCL_FXOS8700CQ_SIGNAL                              SCL   /*!< Signal name */
+
+/* GPIO_AD_B1_01 (coord K11), I2C1_SDA/CSI_I2C_SDA/J35[22]/J23[5]/U13[18]/U32[6] */
+/* Routed pin properties */
+#define BOARD_INITI2C_I2C_SDA_FXOS8700CQ_PERIPHERAL                       LPI2C1   /*!< Peripheral name */
+#define BOARD_INITI2C_I2C_SDA_FXOS8700CQ_SIGNAL                              SDA   /*!< Signal name */
+
+
+/*!
+ * @brief Configures pin routing and optionally pin electrical features.
+ *
+ */
+void BOARD_InitI2C(void);
 
 #if defined(__cplusplus)
 }
