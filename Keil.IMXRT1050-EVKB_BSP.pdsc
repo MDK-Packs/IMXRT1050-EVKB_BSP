@@ -7,6 +7,10 @@
   <repository type="git">https://github.com/MDK-Packs/IMXRT1050-EVKB_BSP.git</repository>
 
   <releases>
+    <release version="1.0.0-dev1">
+      Update Platform example:
+      - enable RTE_USART3
+    </release>
     <release version="1.0.0-dev0">
       Initial development version.
     </release>
