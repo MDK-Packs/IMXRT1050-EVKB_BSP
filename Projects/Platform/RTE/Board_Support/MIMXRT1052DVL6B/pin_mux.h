@@ -604,6 +604,34 @@ void BOARD_InitCAN(void);
 #define BOARD_INITENET_ENET_TXEN_PERIPHERAL                                 ENET   /*!< Peripheral name */
 #define BOARD_INITENET_ENET_TXEN_SIGNAL                               enet_tx_en   /*!< Signal name */
 
+/* GPIO_AD_B0_10 (coord G13), JTAG_TDO/J21[13]/INT1_COMBO/ENET_INT/J22[6]/U32[11] */
+/* Routed pin properties */
+#define BOARD_INITENET_INT1_COMBO_PERIPHERAL                               GPIO1   /*!< Peripheral name */
+#define BOARD_INITENET_INT1_COMBO_SIGNAL                                 gpio_io   /*!< Signal name */
+#define BOARD_INITENET_INT1_COMBO_CHANNEL                                    10U   /*!< Signal channel */
+
+/* Symbols to be used with GPIO driver */
+#define BOARD_INITENET_INT1_COMBO_GPIO                                     GPIO1   /*!< GPIO peripheral base pointer */
+#define BOARD_INITENET_INT1_COMBO_GPIO_PIN                                   10U   /*!< GPIO pin number */
+#define BOARD_INITENET_INT1_COMBO_GPIO_PIN_MASK                      (1U << 10U)   /*!< GPIO pin mask */
+#define BOARD_INITENET_INT1_COMBO_PORT                                     GPIO1   /*!< PORT peripheral base pointer */
+#define BOARD_INITENET_INT1_COMBO_PIN                                        10U   /*!< PORT pin number */
+#define BOARD_INITENET_INT1_COMBO_PIN_MASK                           (1U << 10U)   /*!< PORT pin mask */
+
+/* GPIO_AD_B0_09 (coord F14), JTAG_TDI/J21[5]/ENET_RST/J22[5] */
+/* Routed pin properties */
+#define BOARD_INITENET_USER_LED_PERIPHERAL                                 GPIO1   /*!< Peripheral name */
+#define BOARD_INITENET_USER_LED_SIGNAL                                   gpio_io   /*!< Signal name */
+#define BOARD_INITENET_USER_LED_CHANNEL                                       9U   /*!< Signal channel */
+
+/* Symbols to be used with GPIO driver */
+#define BOARD_INITENET_USER_LED_GPIO                                       GPIO1   /*!< GPIO peripheral base pointer */
+#define BOARD_INITENET_USER_LED_GPIO_PIN                                      9U   /*!< GPIO pin number */
+#define BOARD_INITENET_USER_LED_GPIO_PIN_MASK                         (1U << 9U)   /*!< GPIO pin mask */
+#define BOARD_INITENET_USER_LED_PORT                                       GPIO1   /*!< PORT peripheral base pointer */
+#define BOARD_INITENET_USER_LED_PIN                                           9U   /*!< PORT pin number */
+#define BOARD_INITENET_USER_LED_PIN_MASK                              (1U << 9U)   /*!< PORT pin mask */
+
 
 /*!
  * @brief Configures pin routing and optionally pin electrical features.

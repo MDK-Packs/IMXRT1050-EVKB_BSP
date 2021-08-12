@@ -42,15 +42,22 @@ uint32_t LPUART3_GetFreq   (void) { return BOARD_BOOTCLOCKRUN_UART_CLK_ROOT; }
 void     LPUART3_InitPins  (void) { /* Done in BOARD_InitARDUINO_UART function */ }
 void     LPUART3_DeinitPins(void) { /* Not implemented */ }
 
+/* Approximate loop delay in us */
+void DelayLoop (uint32_t us) {
+  volatile uint32_t cyc_us, loop;
+  
+  cyc_us = (SystemCoreClock + 1000000U-1U) / 1000000U;
+  loop = cyc_us * us;
+  while (loop) {
+    loop--;
+  }
+}
+
 int main (void) {
 
   BOARD_InitBootPins();
   BOARD_InitBootClocks();
   BOARD_InitDebugConsole();
-
-  // GPIO_B1_10 is configured as ENET_REF_CLK
-  // Software Input On Field: Force input path of pad GPIO_B1_10
-  IOMUXC_SetPinMux(IOMUXC_GPIO_B1_10_ENET_REF_CLK, 1U);
 
   // Enable ENET_REF_CLK output mode
   IOMUXC_EnableMode(IOMUXC_GPR, kIOMUXC_GPR_ENET1TxClkOutputDir, true);
@@ -60,6 +67,12 @@ int main (void) {
   NVIC_SetPriority(LPUART3_IRQn, 8U);
 
   SystemCoreClockUpdate();
+
+  // Reset PHY
+  GPIO_PinWrite(GPIO1,  9U, 0U);
+  DelayLoop(500U);
+  GPIO_PinWrite(GPIO1,  9U, 1U);
+  DelayLoop(500U);
 
 #ifdef RTE_VIO_BOARD
   vioInit();                            // Initialize Virtual I/O
