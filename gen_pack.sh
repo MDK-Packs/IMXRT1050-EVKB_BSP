@@ -39,7 +39,7 @@ case $OS in
     ;;
 esac
 
-PATH_TO_ADD="$CMSIS_TOOLSDIR"
+PATH_TO_ADD="$CMSIS_PACK_ROOT:/C/Program Files/7-Zip/:/C/xmllint/:$CMSIS_TOOLSDIR"
 
 [[ ":$PATH:" != *":$PATH_TO_ADD}:"* ]] && PATH="${PATH}:${PATH_TO_ADD}"
 echo $PATH_TO_ADD appended to PATH

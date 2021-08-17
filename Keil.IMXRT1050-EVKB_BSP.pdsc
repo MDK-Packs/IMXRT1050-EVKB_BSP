@@ -7,6 +7,10 @@
   <repository type="git">https://github.com/MDK-Packs/IMXRT1050-EVKB_BSP.git</repository>
 
   <releases>
+    <release version="1.0.0-dev4">
+      Updated baord description,
+      added README.md file
+    </release>
     <release version="1.0.0-dev3">
       Update Platform example:
       - correct pins configuration
@@ -20,8 +24,8 @@
       - Platform project update: Correct ENET pins initialization
     </release>
     <release version="1.0.0-dev1">
-      Update Platform example:
-      - enable RTE_USART3
+          Update Platform example:
+          - enable RTE_USART3
     </release>
     <release version="1.0.0-dev0">
       Initial development version.
@@ -74,18 +78,19 @@
   </components>
 
   <boards>
-    <board vendor="NXP" name="EVKB-IMXRT1050_MDK" revision="Rev.B"
+    <board vendor="NXP" name="EVKB-IMXRT1050_MDK" revision="Rev. A1"
            salesContact="https://www.nxp.com/company/contact-us:CONTACTUS"
            orderForm   ="https://www.nxp.com/part/IMXRT1050-EVKB#/">
-      <description>EVKB-IMXRT1050: EVKB Development Platform for i.MX MIMXRT1050 MCUs</description>
+      <description>Development Platform for i.MXRT1050 MCUs</description>
       <image small="Images/IMXRT1050-EVKB_small.jpg"
              large="Images/IMXRT1050-EVKB_large.jpg" public="true"/>
 
       <book category="overview"  name="https://www.nxp.com/design/development-boards/i-mx-evaluation-and-development-boards/i-mx-rt1050-evaluation-kit:MIMXRT1050-EVK" title="i.MX RT1050 Evaluation Kit"/>
-      <book category="overview"  name="https://www.nxp.com/docs/en/brochure/IMXRTPORTBR.pdf"      title="Fact Sheet" public="true"/>
-      <book category="overview"  name="https://www.nxp.com/webapp/Download?colCode=IMXRT1050EVKQSG"     title="Quick Start Guide" public="true"/>
-      <book category="manual"    name="https://www.nxp.com/webapp/Download?colCode=MIMXRT1050EVKBHUG" title="Board Hardware User's Guide" public="true"/>
-      <book category="schematic" name="Documents/SPF-30168_B1.pdf"     title="Schematics" public="true"/>
+      <book category="overview"  name="https://www.nxp.com/document/guide/getting-started-with-the-mimxrt1050-evk-evaluation-board:GS-MIMXRT1050-EVK" title="Getting Started"/>
+      <book category="overview"  name="Documents/IMXRT1050EVKQSG.pdf"  title="Quick Start Guide"           public="true"/>
+      <book category="manual"    name="Documents/MIMXRT1050EVKHUG.pdf" title="Board Hardware User's Guide" public="true"/>
+      <book category="schematic" name="Documents/SPF-30168_B1.pdf"     title="Schematics"                  public="true"/>
+      <book category="other"     name="Documentation/README.md"        title="Guide"                       public="true"/>
 
       <mountedDevice Dname="MIMXRT1052DVL6B" Dvendor="NXP:11"/>
       <debugProbe connector="Micro-USB" debugClock="10000000" debugLink="swd" name="DAP-Link" />
