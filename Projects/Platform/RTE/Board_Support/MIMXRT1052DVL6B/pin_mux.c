@@ -225,7 +225,9 @@ void BOARD_InitBootPins(void) {
     BOARD_InitENET();
     BOARD_InitUSDHC();
     BOARD_InitARDUINO_UART();
+    BOARD_InitUSER_LED();
     BOARD_InitUSER_BUTTON();
+    BOARD_InitI2C();
 }
 
 /*
@@ -550,8 +552,6 @@ BOARD_InitENET:
   - {pin_num: B12, peripheral: ENET, signal: 'enet_tx_data, 0', pin_signal: GPIO_B1_07, pull_keeper_enable: Disable, slew_rate: Fast}
   - {pin_num: A12, peripheral: ENET, signal: 'enet_tx_data, 1', pin_signal: GPIO_B1_08, pull_keeper_enable: Disable, slew_rate: Fast}
   - {pin_num: A13, peripheral: ENET, signal: enet_tx_en, pin_signal: GPIO_B1_09, pull_keeper_enable: Disable, slew_rate: Fast}
-  - {pin_num: G13, peripheral: GPIO1, signal: 'gpio_io, 10', pin_signal: GPIO_AD_B0_10, direction: OUTPUT, gpio_init_state: 'true'}
-  - {pin_num: F14, peripheral: GPIO1, signal: 'gpio_io, 09', pin_signal: GPIO_AD_B0_09, direction: OUTPUT, gpio_init_state: 'true'}
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS ***********
  */
 
@@ -564,26 +564,6 @@ BOARD_InitENET:
 void BOARD_InitENET(void) {
   CLOCK_EnableClock(kCLOCK_Iomuxc);           
 
-  /* GPIO configuration of USER_LED on GPIO_AD_B0_09 (pin F14) */
-  gpio_pin_config_t USER_LED_config = {
-      .direction = kGPIO_DigitalOutput,
-      .outputLogic = 1U,
-      .interruptMode = kGPIO_NoIntmode
-  };
-  /* Initialize GPIO functionality on GPIO_AD_B0_09 (pin F14) */
-  GPIO_PinInit(GPIO1, 9U, &USER_LED_config);
-
-  /* GPIO configuration of INT1_COMBO on GPIO_AD_B0_10 (pin G13) */
-  gpio_pin_config_t INT1_COMBO_config = {
-      .direction = kGPIO_DigitalOutput,
-      .outputLogic = 1U,
-      .interruptMode = kGPIO_NoIntmode
-  };
-  /* Initialize GPIO functionality on GPIO_AD_B0_10 (pin G13) */
-  GPIO_PinInit(GPIO1, 10U, &INT1_COMBO_config);
-
-  IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B0_09_GPIO1_IO09, 0U); 
-  IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B0_10_GPIO1_IO10, 0U); 
   IOMUXC_SetPinMux(IOMUXC_GPIO_B1_04_ENET_RX_DATA00, 0U); 
   IOMUXC_SetPinMux(IOMUXC_GPIO_B1_05_ENET_RX_DATA01, 0U); 
   IOMUXC_SetPinMux(IOMUXC_GPIO_B1_06_ENET_RX_EN, 0U); 
@@ -721,9 +701,9 @@ void BOARD_InitARDUINO_UART(void) {
 /*
  * TEXT BELOW IS USED AS SETTING FOR TOOLS *************************************
 BOARD_InitUSER_LED:
-- options: {callFromInitBoot: 'false', coreID: core0, enableClock: 'true'}
+- options: {callFromInitBoot: 'true', coreID: core0, enableClock: 'true'}
 - pin_list:
-  - {pin_num: F14, peripheral: GPIO1, signal: 'gpio_io, 09', pin_signal: GPIO_AD_B0_09, direction: OUTPUT, gpio_init_state: 'true', open_drain: Disable}
+  - {pin_num: F14, peripheral: GPIO1, signal: 'gpio_io, 09', pin_signal: GPIO_AD_B0_09, direction: OUTPUT, gpio_init_state: 'true', pull_keeper_enable: Disable, open_drain: Disable}
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS ***********
  */
 
@@ -746,7 +726,7 @@ void BOARD_InitUSER_LED(void) {
   GPIO_PinInit(GPIO1, 9U, &USER_LED_config);
 
   IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B0_09_GPIO1_IO09, 0U); 
-  IOMUXC_SetPinConfig(IOMUXC_GPIO_AD_B0_09_GPIO1_IO09, 0x70A0U); 
+  IOMUXC_SetPinConfig(IOMUXC_GPIO_AD_B0_09_GPIO1_IO09, 0x60A0U); 
 }
 
 
@@ -755,7 +735,7 @@ void BOARD_InitUSER_LED(void) {
 BOARD_InitUSER_BUTTON:
 - options: {callFromInitBoot: 'true', coreID: core0, enableClock: 'true'}
 - pin_list:
-  - {pin_num: L6, peripheral: GPIO5, signal: 'gpio_io, 00', pin_signal: WAKEUP}
+  - {pin_num: L6, peripheral: GPIO5, signal: 'gpio_io, 00', pin_signal: WAKEUP, direction: INPUT}
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS ***********
  */
 
@@ -768,6 +748,15 @@ BOARD_InitUSER_BUTTON:
 void BOARD_InitUSER_BUTTON(void) {
   CLOCK_EnableClock(kCLOCK_IomuxcSnvs);       
 
+  /* GPIO configuration of USER_BUTTON on WAKEUP (pin L6) */
+  gpio_pin_config_t USER_BUTTON_config = {
+      .direction = kGPIO_DigitalInput,
+      .outputLogic = 0U,
+      .interruptMode = kGPIO_NoIntmode
+  };
+  /* Initialize GPIO functionality on WAKEUP (pin L6) */
+  GPIO_PinInit(GPIO5, 0U, &USER_BUTTON_config);
+
   IOMUXC_SetPinMux(IOMUXC_SNVS_WAKEUP_GPIO5_IO00, 0U); 
 }
 
@@ -775,7 +764,7 @@ void BOARD_InitUSER_BUTTON(void) {
 /*
  * TEXT BELOW IS USED AS SETTING FOR TOOLS *************************************
 BOARD_InitI2C:
-- options: {callFromInitBoot: 'false', coreID: core0, enableClock: 'true'}
+- options: {callFromInitBoot: 'true', coreID: core0, enableClock: 'true'}
 - pin_list:
   - {pin_num: J11, peripheral: LPI2C1, signal: SCL, pin_signal: GPIO_AD_B1_00, identifier: I2C_SCL_FXOS8700CQ, software_input_on: Enable, open_drain: Enable}
   - {pin_num: K11, peripheral: LPI2C1, signal: SDA, pin_signal: GPIO_AD_B1_01, identifier: I2C_SDA_FXOS8700CQ, software_input_on: Enable, open_drain: Enable}

@@ -663,11 +663,6 @@
                         <data>true</data>
                      </feature>
                   </dependency>
-                  <dependency resourceType="SWComponent" resourceId="platform.drivers.igpio" description="Pins initialization requires the IGPIO Driver in the project." problem_level="2" source="Pins:BOARD_InitENET">
-                     <feature name="enabled" evaluation="equal" configuration="core0">
-                        <data>true</data>
-                     </feature>
-                  </dependency>
                </dependencies>
                <pins>
                   <pin peripheral="ENET" signal="enet_mdc" pin_num="A7" pin_signal="GPIO_EMC_40">
@@ -729,18 +724,6 @@
                      <pin_features>
                         <pin_feature name="pull_keeper_enable" value="Disable"/>
                         <pin_feature name="slew_rate" value="Fast"/>
-                     </pin_features>
-                  </pin>
-                  <pin peripheral="GPIO1" signal="gpio_io, 10" pin_num="G13" pin_signal="GPIO_AD_B0_10">
-                     <pin_features>
-                        <pin_feature name="direction" value="OUTPUT"/>
-                        <pin_feature name="gpio_init_state" value="true"/>
-                     </pin_features>
-                  </pin>
-                  <pin peripheral="GPIO1" signal="gpio_io, 09" pin_num="F14" pin_signal="GPIO_AD_B0_09">
-                     <pin_features>
-                        <pin_feature name="direction" value="OUTPUT"/>
-                        <pin_feature name="gpio_init_state" value="true"/>
                      </pin_features>
                   </pin>
                </pins>
@@ -897,7 +880,7 @@
             <function name="BOARD_InitUSER_LED">
                <description>Configures pin routing and optionally pin electrical features for LED.</description>
                <options>
-                  <callFromInitBoot>false</callFromInitBoot>
+                  <callFromInitBoot>true</callFromInitBoot>
                   <coreID>core0</coreID>
                   <enableClock>true</enableClock>
                </options>
@@ -923,6 +906,7 @@
                      <pin_features>
                         <pin_feature name="direction" value="OUTPUT"/>
                         <pin_feature name="gpio_init_state" value="true"/>
+                        <pin_feature name="pull_keeper_enable" value="Disable"/>
                         <pin_feature name="open_drain" value="Disable"/>
                      </pin_features>
                   </pin>
@@ -936,6 +920,11 @@
                   <enableClock>true</enableClock>
                </options>
                <dependencies>
+                  <dependency resourceType="Peripheral" resourceId="GPIO5" description="Peripheral GPIO5 is not initialized" problem_level="1" source="Pins:BOARD_InitUSER_BUTTON">
+                     <feature name="initialized" evaluation="equal">
+                        <data>true</data>
+                     </feature>
+                  </dependency>
                   <dependency resourceType="SWComponent" resourceId="platform.drivers.common" description="Pins initialization requires the COMMON Driver in the project." problem_level="2" source="Pins:BOARD_InitUSER_BUTTON">
                      <feature name="enabled" evaluation="equal" configuration="core0">
                         <data>true</data>
@@ -946,15 +935,24 @@
                         <data>true</data>
                      </feature>
                   </dependency>
+                  <dependency resourceType="SWComponent" resourceId="platform.drivers.igpio" description="Pins initialization requires the IGPIO Driver in the project." problem_level="2" source="Pins:BOARD_InitUSER_BUTTON">
+                     <feature name="enabled" evaluation="equal" configuration="core0">
+                        <data>true</data>
+                     </feature>
+                  </dependency>
                </dependencies>
                <pins>
-                  <pin peripheral="GPIO5" signal="gpio_io, 00" pin_num="L6" pin_signal="WAKEUP"/>
+                  <pin peripheral="GPIO5" signal="gpio_io, 00" pin_num="L6" pin_signal="WAKEUP">
+                     <pin_features>
+                        <pin_feature name="direction" value="INPUT"/>
+                     </pin_features>
+                  </pin>
                </pins>
             </function>
             <function name="BOARD_InitI2C">
                <description>Configures pin routing and optionally pin electrical features.</description>
                <options>
-                  <callFromInitBoot>false</callFromInitBoot>
+                  <callFromInitBoot>true</callFromInitBoot>
                   <coreID>core0</coreID>
                   <enableClock>true</enableClock>
                </options>

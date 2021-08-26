@@ -52,8 +52,8 @@
 #define m_interrupts_ram_start         0x20000000
 #define m_interrupts_ram_size          __ram_vector_table_size__
 
-#define  m_data_start                  (m_interrupts_ram_start + m_interrupts_ram_size)
-#define  m_data_size                   (0x00020000 - m_interrupts_ram_size)
+#define m_data_start                   (m_interrupts_ram_start + m_interrupts_ram_size)
+#define m_data_size                    (0x00020000 - m_interrupts_ram_size)
 
 #define m_data_noinit_size             0x00000500
 
@@ -101,7 +101,7 @@ LR_m_text m_interrupts_start m_text_start+m_text_size-m_interrupts_start {   ; l
   VECTOR_RAM m_interrupts_start EMPTY 0 {
   }
 #endif
-  RW_m_data m_data_start m_data_size-Stack_Size-Heap_Size-m_qacode_size-m_data_noinit_size { ; RW data
+  RW_m_data m_data_start m_data_size-Stack_Size-Heap_Size-m_data_noinit_size { ; RW data
     .ANY (+RW +ZI)
     * (RamFunction)
     * (NonCacheable.init)

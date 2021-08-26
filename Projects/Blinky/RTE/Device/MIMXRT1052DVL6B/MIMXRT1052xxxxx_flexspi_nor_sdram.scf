@@ -52,8 +52,8 @@
 #define m_interrupts_ram_start         0x80000000
 #define m_interrupts_ram_size          __ram_vector_table_size__
 
-#define  m_data_start                  (m_interrupts_ram_start + m_interrupts_ram_size)
-#define  m_data_size                   (0x01E00000 - m_interrupts_ram_size)
+#define m_data_start                   (m_interrupts_ram_start + m_interrupts_ram_size)
+#define m_data_size                    (0x01E00000 - m_interrupts_ram_size)
 
 #define m_ncache_start                 0x81E00000
 #define m_ncache_size                  0x00200000
@@ -113,7 +113,7 @@ LR_m_text m_interrupts_start m_text_start+m_text_size-m_interrupts_start {   ; l
 #if (defined(__heap_noncacheable__))
   RW_m_data m_data_start m_data_size-Stack_Size { ; RW data
 #else
-  RW_m_data m_data_start m_data_size-Stack_Size-Heap_Size-m_qacode_size-m_ncache_size-m_data_noinit_size { ; RW data
+  RW_m_data m_data_start m_data_size-Stack_Size-Heap_Size-m_ncache_size-m_data_noinit_size { ; RW data
 #endif
     .ANY (+RW +ZI)
     *(*m_usb_dma_init_data)

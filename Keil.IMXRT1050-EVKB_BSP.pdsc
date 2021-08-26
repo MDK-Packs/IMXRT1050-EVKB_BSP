@@ -7,6 +7,12 @@
   <repository type="git">https://github.com/MDK-Packs/IMXRT1050-EVKB_BSP.git</repository>
 
   <releases>
+    <release version="1.0.0-dev5">
+      Update CMSIS-Driver VIO: add define VIO_SENSOR_DISABLE
+      Example projects:
+      - correct linker files (remove m_qacode_size from RW data)
+      - Platform example: correct pins configuration
+    </release>
     <release version="1.0.0-dev4">
       Updated baord description,
       added README.md file
@@ -65,7 +71,7 @@
 
   <components>
     <!-- VIO component for IMXRT1050-EVKB -->
-    <component Cclass="CMSIS Driver" Cgroup="VIO" Csub="Board" Cvariant="IMXRT1050-EVKB" Cversion="1.0.0" Capiversion="0.1.0"   condition="IMXRT1050-EVKB VIO">
+    <component Cclass="CMSIS Driver" Cgroup="VIO" Csub="Board" Cvariant="IMXRT1050-EVKB" Cversion="1.0.1" Capiversion="0.1.0"   condition="IMXRT1050-EVKB VIO">
       <description>Virtual I/O implementation for IMXRT1050-EVKB VIO</description>
       <RTE_Components_h>
         #define RTE_VIO_BOARD
@@ -90,7 +96,7 @@
       <book category="overview"  name="Documents/IMXRT1050EVKQSG.pdf"  title="Quick Start Guide"           public="true"/>
       <book category="manual"    name="Documents/MIMXRT1050EVKHUG.pdf" title="Board Hardware User's Guide" public="true"/>
       <book category="schematic" name="Documents/SPF-30168_B1.pdf"     title="Schematics"                  public="true"/>
-      <book category="other"     name="Documentation/README.md"        title="Guide"                       public="true"/>
+      <book category="other"     name="Documents/README.md"        title="Guide"                       public="true"/>
 
       <mountedDevice Dname="MIMXRT1052DVL6B" Dvendor="NXP:11"/>
       <debugProbe connector="Micro-USB" debugClock="10000000" debugLink="swd" name="DAP-Link" />
