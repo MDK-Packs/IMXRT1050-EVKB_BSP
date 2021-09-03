@@ -474,9 +474,9 @@
           <targetInfo name="IMXRT1050-EVKB"/>
         </targetInfos>
       </package>
-      <package name="IMXRT1050-EVKB_BSP" schemaVersion="1.7.2" url="https://github.com/MDK-Packs/Pack/raw/master/IMXRT1050-EVKB_BSP/" vendor="Keil" version="1.0.0-dev0">
+      <package name="IMXRT1050-EVKB_BSP" schemaVersion="1.7.2" url="https://github.com/MDK-Packs/Pack/raw/master/IMXRT1050-EVKB_BSP/" vendor="Keil" version="1.0.0">
         <targetInfos>
-          <targetInfo name="IMXRT1050-EVKB"/>
+          <targetInfo name="IMXRT1050-EVKB" versionMatchMode="fixed"/>
         </targetInfos>
       </package>
       <package name="iMXRT105x_MWP" schemaVersion="1.7.2" url="http://www.keil.com/pack/" vendor="Keil" version="1.4.0">
@@ -496,8 +496,8 @@
       </package>
     </packages>
     <boards>
-      <board Bname="EVKB-IMXRT1050_MDK" Bvendor="NXP" Bversion="Rev.B">
-        <package name="EVKB-IMXRT1050_BSP" schemaVersion="1.7.2" url="https://github.com/MDK-Packs/Pack/raw/master/EVKB-IMXRT1050_BSP/" vendor="Keil" version="1.0.0-dev0"/>
+      <board Bname="EVKB-IMXRT1050_MDK" Bvendor="NXP" Bversion="Rev. A1">
+        <package name="IMXRT1050-EVKB_BSP" schemaVersion="1.7.2" url="https://github.com/MDK-Packs/Pack/raw/master/IMXRT1050-EVKB_BSP/" vendor="Keil" version="1.0.0"/>
         <targetInfos>
           <targetInfo name="IMXRT1050-EVKB"/>
         </targetInfos>
@@ -610,7 +610,7 @@
           <targetInfo name="IMXRT1050-EVKB"/>
         </targetInfos>
       </component>
-      <component Capiversion="0.1.0" Cclass="CMSIS Driver" Cgroup="VIO" Csub="Board" Cvariant="IMXRT1050-EVKB" Cvendor="Keil" Cversion="1.0.0" condition="IMXRT1050-EVKB VIO">
+      <component Capiversion="0.1.0" Cclass="CMSIS Driver" Cgroup="VIO" Csub="Board" Cvariant="IMXRT1050-EVKB" Cvendor="Keil" Cversion="1.0.1" condition="IMXRT1050-EVKB VIO">
         <package name="IMXRT1050-EVKB_BSP" schemaVersion="1.7.2" url="https://github.com/MDK-Packs/Pack/raw/master/IMXRT1050-EVKB_BSP/" vendor="Keil" version="1.0.0"/>
         <targetInfos>
           <targetInfo name="IMXRT1050-EVKB"/>
@@ -944,9 +944,8 @@
   <LayerInfo>
     <Layers>
       <Layer>
-        <LayName>Blinky</LayName>
+        <LayName>Platform</LayName>
         <LayPrjMark>1</LayPrjMark>
-        <LayTitle>Platform</LayTitle>
       </Layer>
       <Layer>
         <LayName>App</LayName>
@@ -964,7 +963,6 @@
         <LayDesc>Board setup with interfaces</LayDesc>
         <LayCat>Board</LayCat>
         <LayLic>BSD 3-Clause, Apache 2.0</LayLic>
-        <LayTarg>1</LayTarg>
         <interfaces>
           <consumes id="RTOS2"/>
           <provides id="C_ETH" value="0"/>
@@ -976,6 +974,7 @@
           <provides id="STDERR"/>
           <provides id="Heap" value="65536"/>
         </interfaces>
+        <LayTarg>1</LayTarg>
       </Layer>
       <Layer>
         <LayName>RTOS</LayName>

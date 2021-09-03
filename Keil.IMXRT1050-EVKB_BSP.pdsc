@@ -7,6 +7,11 @@
   <repository type="git">https://github.com/MDK-Packs/IMXRT1050-EVKB_BSP.git</repository>
 
   <releases>
+    <release version="1.0.0-dev6">
+      Example projects:
+      - add startup_MIMXRT1052.S file
+      - Platform example: correct packs with fixed version
+    </release>
     <release version="1.0.0-dev5">
       Update CMSIS-Driver VIO: add define VIO_SENSOR_DISABLE
       Example projects:
@@ -96,7 +101,7 @@
       <book category="overview"  name="Documents/IMXRT1050EVKQSG.pdf"  title="Quick Start Guide"           public="true"/>
       <book category="manual"    name="Documents/MIMXRT1050EVKHUG.pdf" title="Board Hardware User's Guide" public="true"/>
       <book category="schematic" name="Documents/SPF-30168_B1.pdf"     title="Schematics"                  public="true"/>
-      <book category="other"     name="Documents/README.md"        title="Guide"                       public="true"/>
+      <book category="other"     name="Documents/README.md"            title="Guide"                       public="true"/>
 
       <mountedDevice Dname="MIMXRT1052DVL6B" Dvendor="NXP:11"/>
       <debugProbe connector="Micro-USB" debugClock="10000000" debugLink="swd" name="DAP-Link" />
