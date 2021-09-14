@@ -7,39 +7,14 @@
   <repository type="git">https://github.com/MDK-Packs/IMXRT1050-EVKB_BSP.git</repository>
 
   <releases>
-    <release version="1.0.0-dev6">
+    <release version="1.0.0" date="2021-09-14">
+      Board description and documentation for IMXRT1050-EVKB
+      Synchronized with NXP MIMXRT1052_DFP 13.1.0 and NXP EVKB-IMXRT1050_BSP 13.1.0
+      Drivers:
+      - CMSIS-Driver VIO
       Example projects:
-      - add startup_MIMXRT1052.S file
-      - Platform example: correct packs with fixed version
-    </release>
-    <release version="1.0.0-dev5">
-      Update CMSIS-Driver VIO: add define VIO_SENSOR_DISABLE
-      Example projects:
-      - correct linker files (remove m_qacode_size from RW data)
-      - Platform example: correct pins configuration
-    </release>
-    <release version="1.0.0-dev4">
-      Updated baord description,
-      added README.md file
-    </release>
-    <release version="1.0.0-dev3">
-      Update Platform example:
-      - correct pins configuration
-    </release>
-    <release version="1.0.0-dev2">
-      Update to sync with NXP MIMXRT1052_DFP 13.1.0 and NXP EVKB-IMXRT1050_BSP 13.1.0
-      Correct device in board description attribute 'mountedDevice'
-      Example projects:
-      - update linker files
-      - update header board.h (sync to NXP.EVKB-IMXRT1050_BSP 13.1.0 pack)
-      - Platform project update: Correct ENET pins initialization
-    </release>
-    <release version="1.0.0-dev1">
-          Update Platform example:
-          - enable RTE_USART3
-    </release>
-    <release version="1.0.0-dev0">
-      Initial development version.
+      - CMSIS-RTOS2 Blinky (verify the basic tool setup)
+      - CMSIS-RTOS2 Platform (configure the board hardware)
     </release>
   </releases>
 
