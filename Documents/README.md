@@ -33,11 +33,11 @@ Make sure that you have updated your CMSIS-DAP firmware to the latest version. T
 
 ### Using HyperFlash
 
-If your board is configured for HyperFlash (SW7 is set to OFF/ON/ON/OFF), use the following CMSIS-DAP firmware: [DAPLink 0254](./0254_k20dx_mimxrt1050_evk_hyper_0x8000.bin)
+If your board is configured for HyperFlash (SW7 is set to OFF/ON/ON/OFF), use the following CMSIS-DAP firmware: [DAPLink 0254](../DAPLink/0254_k20dx_mimxrt1050_evk_hyper_0x8000.bin)
 
 ### Using QSPI Flash
 
-If your board is configured for QSPI Flash (SW7 is *not set* to OFF/ON/ON/OFF), use the following CMSIS-DAP firmware: [DAPLink 0254](./0254_k20dx_mimxrt1050_evk_qspi_0x8000.bin)
+If your board is configured for QSPI Flash (SW7 is *not set* to OFF/ON/ON/OFF), use the following CMSIS-DAP firmware: [DAPLink 0254](../DAPLink/0254_k20dx_mimxrt1050_evk_qspi_0x8000.bin)
 
 **Flashing instructions for Windows users**
 
