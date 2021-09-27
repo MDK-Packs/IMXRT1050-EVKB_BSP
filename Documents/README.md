@@ -21,11 +21,17 @@ This board support pack contains a CMSIS-Driver for the [VIO](https://arm-softwa
 
 Refer to the [schematics](#schematics) for board connection information.
 
-## Jumper settings
+## WiFi Shields
 
 For the correct operation of WiFi shields using the Arduino R3 header, make sure that the following jumpers are correctly fitted:
 - J26 closed
 - J27: 1-2 closed
+
+### Special considerations
+
+For correct operation, the SparkFun ESP8266 WiFi Shield requires a jumper cable to connect the **RESET** pin on the Arduino connector with the **RST** pin in the area marked as **ESP8266 GPIO**:
+
+![Connection on the SparkFun ESP8266 WiFi Shield](./SparkFun_Jumper_Cable.png)
 
 ## CMSIS-DAP Firmware
 
