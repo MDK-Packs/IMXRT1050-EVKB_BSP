@@ -33,6 +33,8 @@ For correct operation, the SparkFun ESP8266 WiFi Shield requires a jumper cable 
 
 ![Connection on the SparkFun ESP8266 WiFi Shield](./SparkFun_Jumper_Cable.png)
 
+For stable operation, make sure that you are using an external DC 5V power supply (connected to J2). Also, fit jumper J1 to 1-2 closed and set the switch SW1 to position 2-3.
+
 ## CMSIS-DAP Firmware
 
 Make sure that you have updated your CMSIS-DAP firmware to the latest version. This makes the board compatible with [Keil Studio Cloud](https://keil.arm.com) that enables browser-based project creation and debugging. The following instructions apply if your board is equipped with at U23 a Kinetis K20DX device (marked as M20AGV).
