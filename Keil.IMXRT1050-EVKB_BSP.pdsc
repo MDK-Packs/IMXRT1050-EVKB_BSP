@@ -8,7 +8,7 @@
 
   <releases>
     <release version="1.0.1" date="2021-09-29">
-      Added board features
+      Added board features to board description
     </release>
     <release version="1.0.0" date="2021-09-14">
       Board description and documentation for IMXRT1050-EVKB
