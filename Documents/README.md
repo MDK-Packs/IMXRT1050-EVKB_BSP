@@ -8,6 +8,20 @@ The i.MX RT1050 EVK is a 4-layer through-hole USB-powered PCB. At its heart lies
 
 - [IMXRT1050-EVKB board schematic](./SPF-30168_B1.pdf)
 
+## Power supply
+
+A DC 5V external power supply is used to supply the board at J2, and a slide switch SW1 is used to turn the Power ON/OFF. J28 and J9 also can be used to supply the EVK Board. Different power supply need to configure different Jumper setting of J1:
+
+| Power supply | J1 setting |
+|:------------:|:----------:|
+| J2           | 1-2        |
+| J9           | 3-4        |
+| J28          | 5-6        |
+
+*Note*
+
+If you do not have an external DC 5 V power supply, it is recommended to supply the board via J9 with a standard 5 V USB power supply. Supplying the board via J28 (which is connected to the on-board CMSIS-DAP debug adapter) does no work reliably.
+
 ## CMSIS-Drivers
 
 This board support pack contains a CMSIS-Driver for the [VIO](https://arm-software.github.io/CMSIS_5/develop/Driver/html/group__vio__interface__gr.html) interface. This is a virtual I/O abstraction for peripherals that are typically used in example projects. The **Blinky** example uses this interface to create a blinking light with the USER LED mounted on the board that can be controlled by the USER BUTTON (SW8).
@@ -24,8 +38,11 @@ Refer to the [schematics](#schematics) for board connection information.
 ## WiFi Shields
 
 For the correct operation of WiFi shields using the Arduino R3 header, make sure that the following jumpers are correctly fitted:
-- J26 closed
-- J27: 1-2 closed
+
+| Jumper | Setting |
+|:------:|:-------:|
+| J26    | closed  |
+| J27    | 1-2     |
 
 ### Special considerations
 
