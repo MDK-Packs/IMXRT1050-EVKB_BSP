@@ -20,7 +20,7 @@ A DC 5V external power supply is used to supply the board at J2, and a slide swi
 
 *Note*
 
-If you do not have an external DC 5 V power supply, it is recommended to supply the board via J9 with a standard 5 V USB power supply. Supplying the board via J28 (which is connected to the on-board CMSIS-DAP debug adapter) does no work reliably.
+If you do not have an external DC 5 V power supply, it is recommended to supply the board via J9 with a standard 5 V USB power supply. Supplying the board via J28 (which is connected to the on-board CMSIS-DAP debug adapter) is not recommended when using Arduino shields or Ethernet.
 
 ## CMSIS-Drivers
 
@@ -50,7 +50,7 @@ For correct operation, the SparkFun ESP8266 WiFi Shield requires a jumper cable 
 
 ![Connection on the SparkFun ESP8266 WiFi Shield](./SparkFun_Jumper_Cable.png)
 
-For stable operation, make sure that you are using an external DC 5V power supply (connected to J2). Also, fit jumper J1 to 1-2 closed and set the switch SW1 to position 2-3.
+For stable operation, make sure that you are using an external DC 5V power supply (connected to **J2**). Also, fit jumper J1 to **1-2** closed and set the switch SW1 to position **2-3**.
 
 ## CMSIS-DAP Firmware
 
@@ -58,32 +58,45 @@ Make sure that you have updated your CMSIS-DAP firmware to the latest version. T
 
 ### Using HyperFlash
 
-If your board is configured for HyperFlash (SW7 is set to OFF/ON/ON/OFF), use the following CMSIS-DAP firmware: [DAPLink 0254](../DAPLink/0254_k20dx_mimxrt1050_evk_hyper_0x8000.bin)
+If your board is configured for HyperFlash (**SW7** is set to OFF/ON/ON/OFF), use the following CMSIS-DAP firmware: [DAPLink 0254](../DAPLink/0254_k20dx_mimxrt1050_evk_hyper_0x8000.bin)
 
 ### Using QSPI Flash
 
-If your board is configured for QSPI Flash (SW7 is *not set* to OFF/ON/ON/OFF), use the following CMSIS-DAP firmware: [DAPLink 0254](../DAPLink/0254_k20dx_mimxrt1050_evk_qspi_0x8000.bin)
+If your board is configured for QSPI Flash (**SW7** is *not set* to OFF/ON/ON/OFF), use the following CMSIS-DAP firmware: [DAPLink 0254](../DAPLink/0254_k20dx_mimxrt1050_evk_qspi_0x8000.bin)
 
-**Flashing instructions for Windows users**
+### Jumper settings
 
-1. While holding down the boards reset button, connect the boards USB debug port to the computer. It should enumerate and mount as **MAINTENANCE**.
+Close **1-2** on jumper block **J27** (top right corner of the board).
+
+### Flashing instructions for Windows users
+
+1. While holding down the **SW4** button, connect the board's USB debug port (**J28**) to the computer. It should enumerate and mount as **MAINTENANCE**.
 1. Drag-and-drop the firmware file onto the mounted drive.
 1. Wait for the file copy operation to complete.
-1. Power cycle the board. It will now enumerate and mount as DAPLINK or the name of the board.
+1. Power cycle the board. It will now enumerate and mount as **RT1050-EVK**.
 
-**Flashing instructions for Linux users**
+### Flashing instructions for MAC users
 
-1. While holding down the boards reset button, connect the boards USB debug port to the computer. It should enumerate as MAINTENANCE.
-1. In a terminal execute  
-   `cp <path to firmware file> <MAINTENANCE> && sync`  
-   *Note*: make sure to change MAINTENANCE to the name of the mount point of the drive on your system.
-1. Power cycle the board. It will now enumerate and mount as DAPLINK or the name of the board.
-
-**Flashing instructions for MAC users**
-
-1. While holding down the boards reset button, connect the boards USB debug port to the computer. It should enumerate as MAINTENANCE.
+1. While holding down the **SW4** button, connect the board's USB debug port (**J28**) to the computer. It should enumerate as **MAINTENANCE**.
 1. In a terminal execute  
    `sudo mount -u -w -o sync /Volumes/MAINTENANCE ; cp -X <path to firmware file> /Volumes/MAINTENANCE/`  
    *Note*: If your drive does not mount as MAINTENANCE make sure to change this to match the name of the mounted disk attached to your system.
 1. Wait for the file copy operation to complete.
-1. Power cycle the board. It will now enumerate and mount as DAPLINK or the name of the board.
+1. Power cycle the board. It will now enumerate and mount as **RT1050-EVK**.
+
+### Flashing instructions for Linux users
+
+1. While holding down the **SW4** button, connect the board's USB debug port (**J28**) to the computer. It should enumerate as **MAINTENANCE**.
+1. In a terminal execute  
+   `$ cp <path to firmware file> <MAINTENANCE> && sync`  
+   *Note*: make sure to change MAINTENANCE to the name of the mount point of the drive on your system.
+1. Power cycle the board. It will now enumerate and mount as **RT1050-EVK**.
+
+## Accessing the board in Keil Studio under Linux
+
+1. On Linux, permission to access USB devices from user space must be explicitly granted via udev rules. This repo contains [daplink.rules](./DAPLink/daplink.rules) that you can copy to make this work.
+1. To install, copy the [daplink.rules](./DAPLink/daplink.rules) to `/etc/udev/rules.d/` on Ubuntu:  
+   `$ sudo cp daplink.rules /etc/udev/rules.d`
+1. To see your changes without a reboot, you can force the udev system to reload:  
+   `$ sudo udevadm control --reload`  
+   `$ sudo udevadm trigger`
