@@ -7,6 +7,9 @@
   <repository type="git">https://github.com/MDK-Packs/IMXRT1050-EVKB_BSP.git</repository>
 
   <releases>
+    <release version="1.0.2">
+      Synchronized with NXP MIMXRT1052_DFP 14.0.0 and NXP EVKB-IMXRT1050_BSP 14.0.0
+    </release>
     <release version="1.0.1" date="2021-09-29">
       Added board features to board description
     </release>
@@ -23,8 +26,8 @@
 
   <requirements>
     <packages>
-      <package vendor="NXP" name="MIMXRT1052_DFP"     version="13.1.0-0"/>
-      <package vendor="NXP" name="EVKB-IMXRT1050_BSP" version="13.1.0-0"/>
+      <package vendor="NXP" name="MIMXRT1052_DFP"     version="14.0.0-0"/>
+      <package vendor="NXP" name="EVKB-IMXRT1050_BSP" version="14.0.0-0"/>
       <package vendor="ARM" name="CMSIS"              version="5.8.0"/>
     </packages>
   </requirements>

@@ -27,12 +27,15 @@
 #endif
 
 #include "clock_config.h"
+#include "peripherals.h"
 #include "board.h"
 #include "pin_mux.h"
 #include "main.h"
 
 int main (void) {
 
+  BOARD_ConfigMPU();
+  BOARD_InitBootPeripherals();
   BOARD_InitBootPins();
   BOARD_InitBootClocks();
   BOARD_InitDebugConsole();
