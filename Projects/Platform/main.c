@@ -67,6 +67,11 @@ int main (void) {
 
   SystemCoreClockUpdate();
 
+  /* Reset Ethernet PHY (Required 100 us delay for PHY power on reset) */
+  GPIO_PinWrite(GPIO1,  9U, 0U);
+  SDK_DelayAtLeastUs(500U, CLOCK_GetFreq(kCLOCK_CpuClk));
+  GPIO_PinWrite(GPIO1,  9U, 1U);
+
 #ifdef RTE_VIO_BOARD
   vioInit();                            // Initialize Virtual I/O
 #endif

@@ -100,7 +100,7 @@ pin_labels:
 - {pin_num: F12, pin_signal: GPIO_AD_B0_07, label: 'JTAG_TCK/J21[9]/SWD_CLK'}
 - {pin_num: F13, pin_signal: GPIO_AD_B0_08, label: JTAG_MOD}
 - {pin_num: F14, pin_signal: GPIO_AD_B0_09, label: 'JTAG_TDI/J21[5]/ENET_RST/J22[5]', identifier: USER_LED}
-- {pin_num: G13, pin_signal: GPIO_AD_B0_10, label: 'JTAG_TDO/J21[13]/INT1_COMBO/ENET_INT/J22[6]/U32[11]', identifier: INT1_COMBO}
+- {pin_num: G13, pin_signal: GPIO_AD_B0_10, label: 'JTAG_TDO/J21[13]/INT1_COMBO/ENET_INT/J22[6]/U32[11]', identifier: INT1_COMBO;ENET_INT}
 - {pin_num: G10, pin_signal: GPIO_AD_B0_11, label: 'JTAG_nTRST/J21[3]/INT2_COMBO/LCD_TOUCH_INT/J22[3]/U32[9]', identifier: INT2_COMBO}
 - {pin_num: K14, pin_signal: GPIO_AD_B0_12, label: UART1_TXD, identifier: UART1_TXD}
 - {pin_num: L14, pin_signal: GPIO_AD_B0_13, label: UART1_RXD, identifier: UART1_RXD}
@@ -637,6 +637,7 @@ BOARD_InitENET:
   - {pin_num: B12, peripheral: ENET, signal: 'enet_tx_data, 0', pin_signal: GPIO_B1_07, pull_keeper_enable: Disable, slew_rate: Fast}
   - {pin_num: A12, peripheral: ENET, signal: 'enet_tx_data, 1', pin_signal: GPIO_B1_08, pull_keeper_enable: Disable, slew_rate: Fast}
   - {pin_num: A13, peripheral: ENET, signal: enet_tx_en, pin_signal: GPIO_B1_09, pull_keeper_enable: Disable, slew_rate: Fast}
+  - {pin_num: G13, peripheral: GPIO1, signal: 'gpio_io, 10', pin_signal: GPIO_AD_B0_10, identifier: ENET_INT, direction: OUTPUT, gpio_init_state: 'true'}
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS ***********
  */
 
@@ -649,6 +650,16 @@ BOARD_InitENET:
 void BOARD_InitENET(void) {
   CLOCK_EnableClock(kCLOCK_Iomuxc);           
 
+  /* GPIO configuration of ENET_INT on GPIO_AD_B0_10 (pin G13) */
+  gpio_pin_config_t ENET_INT_config = {
+      .direction = kGPIO_DigitalOutput,
+      .outputLogic = 1U,
+      .interruptMode = kGPIO_NoIntmode
+  };
+  /* Initialize GPIO functionality on GPIO_AD_B0_10 (pin G13) */
+  GPIO_PinInit(GPIO1, 10U, &ENET_INT_config);
+
+  IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B0_10_GPIO1_IO10, 0U); 
   IOMUXC_SetPinMux(IOMUXC_GPIO_B1_04_ENET_RX_DATA00, 0U); 
   IOMUXC_SetPinMux(IOMUXC_GPIO_B1_05_ENET_RX_DATA01, 0U); 
   IOMUXC_SetPinMux(IOMUXC_GPIO_B1_06_ENET_RX_EN, 0U); 
