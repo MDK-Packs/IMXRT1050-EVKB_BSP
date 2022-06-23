@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>FSL_SDK_ENABLE_DRIVER_CACHE_CONTROL=1, CODEC_WM8960_ENABLE, SKIP_SYSCLK_INIT, XIP_EXTERNAL_FLASH=1, XIP_BOOT_HEADER_ENABLE=1, XIP_BOOT_HEADER_DCD_ENABLE=1</Define>
               <Undefine></Undefine>
-              <IncludePath>.</IncludePath>
+              <IncludePath>.;.\Driver_Audio\include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -376,7 +376,7 @@
             <IncludeLibsPath></IncludeLibsPath>
             <Misc>--predefine="-DXIP_BOOT_HEADER_ENABLE=1"</Misc>
             <LinkerInputFile></LinkerInputFile>
-            <DisabledWarnings>6314,6329</DisabledWarnings>
+            <DisabledWarnings>6314,6329,6439</DisabledWarnings>
           </LDads>
         </TargetArmAds>
       </TargetOption>
@@ -413,6 +413,36 @@
               <FileName>retarget_stdio.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Board_IO\retarget_stdio.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Driver</GroupName>
+          <Files>
+            <File>
+              <FileName>Audio_IMXRT1050-EVKB.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Driver_Audio\Audio_IMXRT1050-EVKB.c</FilePath>
+            </File>
+            <File>
+              <FileName>Audio_IMXRT1050-EVKB.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Driver_Audio\Audio_IMXRT1050-EVKB.h</FilePath>
+            </File>
+            <File>
+              <FileName>Config_Audio.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Driver_Audio\Config_Audio.h</FilePath>
+            </File>
+            <File>
+              <FileName>Config_WM8960.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Driver_Audio\Config_WM8960.h</FilePath>
+            </File>
+            <File>
+              <FileName>audio_drv.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Driver_Audio\include\audio_drv.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1299,6 +1329,31 @@
       <LayAsnItem>
         <LayAsnType>1</LayAsnType>
         <LayAsnName>NXP::Device:SDK Drivers:cache</LayAsnName>
+        <LayAsnLayerName>Board</LayAsnLayerName>
+      </LayAsnItem>
+      <LayAsnItem>
+        <LayAsnType>2</LayAsnType>
+        <LayAsnName>.\Driver_Audio\Audio_IMXRT1050-EVKB.c</LayAsnName>
+        <LayAsnLayerName>Board</LayAsnLayerName>
+      </LayAsnItem>
+      <LayAsnItem>
+        <LayAsnType>2</LayAsnType>
+        <LayAsnName>.\Driver_Audio\Audio_IMXRT1050-EVKB.h</LayAsnName>
+        <LayAsnLayerName>Board</LayAsnLayerName>
+      </LayAsnItem>
+      <LayAsnItem>
+        <LayAsnType>2</LayAsnType>
+        <LayAsnName>.\Driver_Audio\Config_Audio.h</LayAsnName>
+        <LayAsnLayerName>Board</LayAsnLayerName>
+      </LayAsnItem>
+      <LayAsnItem>
+        <LayAsnType>2</LayAsnType>
+        <LayAsnName>.\Driver_Audio\Config_WM8960.h</LayAsnName>
+        <LayAsnLayerName>Board</LayAsnLayerName>
+      </LayAsnItem>
+      <LayAsnItem>
+        <LayAsnType>2</LayAsnType>
+        <LayAsnName>.\Driver_Audio\include\audio_drv.h</LayAsnName>
         <LayAsnLayerName>Board</LayAsnLayerName>
       </LayAsnItem>
     </LayAssign>
