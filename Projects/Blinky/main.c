@@ -1,5 +1,6 @@
 /*---------------------------------------------------------------------------
- * Copyright (c) 2021 Arm Limited (or its affiliates). All rights reserved.
+ * Copyright (c) 2021-2022 Arm Limited (or its affiliates). 
+ * All rights reserved.
  *
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -33,6 +34,7 @@
 
 int main (void) {
 
+  BOARD_ConfigMPU();
   BOARD_InitBootPins();
   BOARD_InitBootClocks();
   BOARD_InitDebugConsole();
