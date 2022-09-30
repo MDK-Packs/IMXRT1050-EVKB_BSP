@@ -24,7 +24,7 @@
             <file path="RTE/Board_Support/MIMXRT1052DVL6B/pin_mux.h" update_enabled="true"/>
          </generated_project_files>
          <pins_profile>
-            <processor_version>12.0.0</processor_version>
+            <processor_version>12.0.1</processor_version>
             <pin_labels>
                <pin_label pin_num="E3" pin_signal="GPIO_EMC_00" label="SEMC_D0" identifier="SEMC_D0"/>
                <pin_label pin_num="F3" pin_signal="GPIO_EMC_01" label="SEMC_D1" identifier="SEMC_D1"/>
@@ -1073,7 +1073,7 @@
             <file path="RTE/Board_Support/MIMXRT1052DVL6B/clock_config.h" update_enabled="true"/>
          </generated_project_files>
          <clocks_profile>
-            <processor_version>12.0.0</processor_version>
+            <processor_version>12.0.1</processor_version>
          </clocks_profile>
          <clock_configurations>
             <clock_configuration name="BOARD_BootClockRUN" id_prefix="" prefix_user_defined="false">
@@ -1185,13 +1185,14 @@
                   <setting id="CCM.LCDIF_PRE_CLK_SEL.sel" value="CCM_ANALOG.PLL3_PFD3_CLK" locked="false"/>
                   <setting id="CCM.LPSPI_PODF.scale" value="5" locked="true"/>
                   <setting id="CCM.PERCLK_PODF.scale" value="2" locked="true"/>
-                  <setting id="CCM.SAI1_CLK_PODF.scale" value="64" locked="true"/>
-                  <setting id="CCM.SAI1_CLK_PRED.scale" value="1" locked="true"/>
+                  <setting id="CCM.SAI1_CLK_PODF.scale" value="16" locked="false"/>
+                  <setting id="CCM.SAI1_CLK_PRED.scale" value="1" locked="false"/>
                   <setting id="CCM.SAI1_CLK_SEL.sel" value="CCM_ANALOG.PLL4_MAIN_CLK" locked="false"/>
-                  <setting id="CCM.SAI2_CLK_PODF.scale" value="63" locked="true"/>
-                  <setting id="CCM.SAI2_CLK_PRED.scale" value="1" locked="true"/>
+                  <setting id="CCM.SAI2_CLK_PODF.scale" value="21" locked="false"/>
+                  <setting id="CCM.SAI2_CLK_PRED.scale" value="3" locked="false"/>
                   <setting id="CCM.SEMC_PODF.scale" value="8" locked="true"/>
                   <setting id="CCM.TRACE_PODF.scale" value="3" locked="true"/>
+                  <setting id="CCM_ANALOG.AUDIO_DIV.scale" value="4" locked="false"/>
                   <setting id="CCM_ANALOG.PLL1_BYPASS.sel" value="CCM_ANALOG.PLL1" locked="false"/>
                   <setting id="CCM_ANALOG.PLL1_PREDIV.scale" value="1" locked="true"/>
                   <setting id="CCM_ANALOG.PLL1_VDIV.scale" value="50" locked="true"/>
@@ -1234,7 +1235,7 @@
             <file path="RTE/Board_Support/MIMXRT1052DVL6B/dcd.h" update_enabled="true"/>
          </generated_project_files>
          <dcdx_profile>
-            <processor_version>12.0.0</processor_version>
+            <processor_version>12.0.1</processor_version>
             <output_format>c_array</output_format>
          </dcdx_profile>
          <dcdx_configurations>

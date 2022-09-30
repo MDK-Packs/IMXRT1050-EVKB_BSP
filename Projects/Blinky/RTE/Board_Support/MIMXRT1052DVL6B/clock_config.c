@@ -19,7 +19,7 @@ product: Clocks v10.0
 processor: MIMXRT1052xxxxB
 package_id: MIMXRT1052DVL6B
 mcu_data: ksdk2_0
-processor_version: 12.0.0
+processor_version: 12.0.1
 board: IMXRT1050-EVKB
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS **********/
 
@@ -99,13 +99,14 @@ settings:
 - {id: CCM.LCDIF_PRE_CLK_SEL.sel, value: CCM_ANALOG.PLL3_PFD3_CLK}
 - {id: CCM.LPSPI_PODF.scale, value: '5', locked: true}
 - {id: CCM.PERCLK_PODF.scale, value: '2', locked: true}
-- {id: CCM.SAI1_CLK_PODF.scale, value: '64', locked: true}
-- {id: CCM.SAI1_CLK_PRED.scale, value: '1', locked: true}
+- {id: CCM.SAI1_CLK_PODF.scale, value: '16'}
+- {id: CCM.SAI1_CLK_PRED.scale, value: '1'}
 - {id: CCM.SAI1_CLK_SEL.sel, value: CCM_ANALOG.PLL4_MAIN_CLK}
-- {id: CCM.SAI2_CLK_PODF.scale, value: '63', locked: true}
-- {id: CCM.SAI2_CLK_PRED.scale, value: '1', locked: true}
+- {id: CCM.SAI2_CLK_PODF.scale, value: '21'}
+- {id: CCM.SAI2_CLK_PRED.scale, value: '3'}
 - {id: CCM.SEMC_PODF.scale, value: '8', locked: true}
 - {id: CCM.TRACE_PODF.scale, value: '3', locked: true}
+- {id: CCM_ANALOG.AUDIO_DIV.scale, value: '4'}
 - {id: CCM_ANALOG.PLL1_BYPASS.sel, value: CCM_ANALOG.PLL1}
 - {id: CCM_ANALOG.PLL1_PREDIV.scale, value: '1', locked: true}
 - {id: CCM_ANALOG.PLL1_VDIV.scale, value: '50', locked: true}
@@ -164,7 +165,7 @@ const clock_usb_pll_config_t usb1PllConfig_BOARD_BootClockRUN =
 const clock_audio_pll_config_t audioPllConfig_BOARD_BootClockRUN =
     {
         .loopDivider = 32,                        /* PLL loop divider, Fout = Fin * ( loopDivider + numerator / denominator ) */
-        .postDivider = 1,                         /* Divider after PLL */
+        .postDivider = 4,                         /* Divider after PLL */
         .numerator = 77,                          /* 30 bit numerator of fractional loop divider, Fout = Fin * ( loopDivider + numerator / denominator ) */
         .denominator = 100,                       /* 30 bit denominator of fractional loop divider, Fout = Fin * ( loopDivider + numerator / denominator ) */
         .src = 0,                                 /* Bypass clock source, 0 - OSC 24M, 1 - CLK1_P and CLK1_N */
@@ -290,15 +291,15 @@ void BOARD_BootClockRUN(void)
     /* Set SAI1_CLK_PRED. */
     CLOCK_SetDiv(kCLOCK_Sai1PreDiv, 0);
     /* Set SAI1_CLK_PODF. */
-    CLOCK_SetDiv(kCLOCK_Sai1Div, 63);
+    CLOCK_SetDiv(kCLOCK_Sai1Div, 15);
     /* Set Sai1 clock source. */
     CLOCK_SetMux(kCLOCK_Sai1Mux, 2);
     /* Disable SAI2 clock gate. */
     CLOCK_DisableClock(kCLOCK_Sai2);
     /* Set SAI2_CLK_PRED. */
-    CLOCK_SetDiv(kCLOCK_Sai2PreDiv, 0);
+    CLOCK_SetDiv(kCLOCK_Sai2PreDiv, 2);
     /* Set SAI2_CLK_PODF. */
-    CLOCK_SetDiv(kCLOCK_Sai2Div, 62);
+    CLOCK_SetDiv(kCLOCK_Sai2Div, 20);
     /* Set Sai2 clock source. */
     CLOCK_SetMux(kCLOCK_Sai2Mux, 0);
     /* Disable SAI3 clock gate. */
@@ -422,8 +423,8 @@ void BOARD_BootClockRUN(void)
     pllAudio = (CCM_ANALOG->PLL_AUDIO & (~(CCM_ANALOG_PLL_AUDIO_DIV_SELECT_MASK | CCM_ANALOG_PLL_AUDIO_POWERDOWN_MASK))) |
                CCM_ANALOG_PLL_AUDIO_ENABLE_MASK | CCM_ANALOG_PLL_AUDIO_DIV_SELECT(32);
     pllAudio |= CCM_ANALOG_PLL_AUDIO_POST_DIV_SELECT(2);
-    CCM_ANALOG->MISC2 &= ~CCM_ANALOG_MISC2_AUDIO_DIV_LSB_MASK;
-    CCM_ANALOG->MISC2 &= ~CCM_ANALOG_MISC2_AUDIO_DIV_MSB_MASK;
+    CCM_ANALOG->MISC2 |= CCM_ANALOG_MISC2_AUDIO_DIV_LSB_MASK;
+    CCM_ANALOG->MISC2 |= CCM_ANALOG_MISC2_AUDIO_DIV_MSB_MASK;
     CCM_ANALOG->PLL_AUDIO = pllAudio;
     while ((CCM_ANALOG->PLL_AUDIO & CCM_ANALOG_PLL_AUDIO_LOCK_MASK) == 0)
     {
