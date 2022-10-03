@@ -7,11 +7,10 @@
   <repository type="git">https://github.com/MDK-Packs/IMXRT1050-EVKB_BSP.git</repository>
 
   <releases>
-    <release version="1.1.0-rc0">
+    <release version="1.1.0" date="2022-10-03">
       Synchronize with NXP MIMXRT1052_DFP 15.0.0 and NXP EVKB-IMXRT1050_BSP 15.0.0
-      Package Description (pdsc): Add Device:SDK Drivers:fxos8700cq component to VIO driver condition
-      Platform project
-      - add support for audio
+      Platform project:
+      - add support for Audio
     </release>
     <release version="1.0.1" date="2021-09-29">
       Added board features to board description
