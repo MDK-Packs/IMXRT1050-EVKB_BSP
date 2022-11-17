@@ -1,11 +1,12 @@
 /******************************************************************************
  * @file     vio_IMXRT1050-EVKB.c
  * @brief    Virtual I/O implementation for board IMXRT1050-EVKB
- * @version  V1.0.1
- * @date     21. August 2021
+ * @version  V1.1.0
+ * @date     9. november 2022
  ******************************************************************************/
 /*
- * Copyright (c) 2021 Arm Limited (or its affiliates). All rights reserved.
+ * Copyright (c) 2021-2022 Arm Limited (or its affiliates).
+ * All rights reserved.
  *
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -44,10 +45,8 @@ vioMotionMagneto  | vioValueXYZ[2] | 3-Axis Magnetometer (FXOS8700CQ)           
 #include "fsl_common.h"
 #include "fsl_iomuxc.h"
 #include "fsl_gpio.h"
-#if !defined VIO_SENSOR_DISABLE
 #include "fsl_fxos.h"
 #include "fsl_lpi2c.h"
-#endif
 #include "peripherals.h"
 #include "pin_mux.h"
 #include "board.h"
@@ -77,12 +76,10 @@ __USED vioAddrIPv6_t vioAddrIPv6[VIO_IPV6_ADDRESS_NUM];                 // Memor
 
 #if !defined CMSIS_VIN
 // Global user types, variables, functions:
-#if !defined VIO_SENSOR_DISABLE
   lpi2c_master_handle_t g_m_handle;
   const uint8_t g_accel_address = 0x1FU;
   fxos_handle_t g_fxosHandle = {0};
   fxos_config_t config = {0};
-#endif
 #endif
 
 // Initialize test input, output.
@@ -114,7 +111,6 @@ void vioInit (void) {
   // Initialize buttons pins
   BOARD_InitUSER_BUTTON();
 
-#if !defined VIO_SENSOR_DISABLE
   BOARD_InitI2C();
   BOARD_Accel_I2C_Init();
 
@@ -126,10 +122,9 @@ void vioInit (void) {
         while (1);
     }
 #endif
-#endif
 }
 
-// Print formated string to test terminal.
+// Print formatted string to test terminal.
 int32_t vioPrint (uint32_t level, const char *format, ...) {
   va_list args;
   int32_t ret;
@@ -277,9 +272,7 @@ vioValueXYZ_t vioGetXYZ (uint32_t id) {
   vioValueXYZ_t valueXYZ = {0, 0, 0};
 #if !defined CMSIS_VIN
   // Sensor variables
-#if !defined VIO_SENSOR_DISABLE
   fxos_data_t fxos_data = {0};
-#endif
 #endif
 
   if (index >= VIO_VALUEXYZ_NUM) {
@@ -289,7 +282,6 @@ vioValueXYZ_t vioGetXYZ (uint32_t id) {
 #if !defined CMSIS_VIN
   // Get input xyz values from Sensor
 
-#if !defined VIO_SENSOR_DISABLE
   if (id == vioMotionAccelero) {
     if (FXOS_ReadSensorData(&g_fxosHandle, &fxos_data) != kStatus_Success){
       while(1);
@@ -307,7 +299,6 @@ vioValueXYZ_t vioGetXYZ (uint32_t id) {
     vioValueXYZ[index].Y = (int32_t)(int16_t)((uint16_t)((uint16_t)fxos_data.magYMSB << 8) | (uint16_t)fxos_data.magYLSB);
     vioValueXYZ[index].Z = (int32_t)(int16_t)((uint16_t)((uint16_t)fxos_data.magZMSB << 8) | (uint16_t)fxos_data.magZLSB);
   }
-#endif
 #endif
 
   valueXYZ = vioValueXYZ[index];
@@ -338,7 +329,7 @@ void vioSetIPv4 (uint32_t id, vioAddrIPv4_t addrIPv4) {
 // Get IPv4 address input.
 vioAddrIPv4_t vioGetIPv4 (uint32_t id) {
   uint32_t index = id;
-  vioAddrIPv4_t addrIPv4 = {0U, 0U, 0U, 0U};
+  vioAddrIPv4_t addrIPv4 = { {0U, 0U, 0U, 0U} };
 #if !defined CMSIS_VIN
 // Add user variables here:
 
@@ -382,8 +373,8 @@ void vioSetIPv6 (uint32_t id, vioAddrIPv6_t addrIPv6) {
 // Get IPv6 address input.
 vioAddrIPv6_t vioGetIPv6 (uint32_t id) {
   uint32_t index = id;
-  vioAddrIPv6_t addrIPv6 = {0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U,
-                            0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U};
+  vioAddrIPv6_t addrIPv6 = { {0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U,
+                              0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U} };
 #if !defined CMSIS_VIN
 // Add user variables here:
 
