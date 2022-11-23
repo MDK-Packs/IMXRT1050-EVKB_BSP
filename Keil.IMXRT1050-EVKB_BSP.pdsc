@@ -13,6 +13,9 @@
       - CMSIS-Driver VIO:
       -- Remove VIO_SENSOR_DISABLE define
       -- Correct variables initialization to avoid compiler warnings
+      Example projects:
+      - Add BOARD_InitBootPeripherals() function call to main.c module
+      - Change Debugger adapter from CMSIS-DAP to Any
     </release>
     <release version="1.1.0" date="2022-10-03">
       Synchronize with NXP MIMXRT1052_DFP 15.0.0 and NXP EVKB-IMXRT1050_BSP 15.0.0
