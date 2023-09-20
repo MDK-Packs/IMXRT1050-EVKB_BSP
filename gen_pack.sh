@@ -66,6 +66,7 @@ PACK_DIRS=${PACK_DIRS//$PACK_WAREHOUSE/}
   
 # Specify file names to be added to pack base directory
 PACK_BASE_FILES="
+  LICENSE
 "
 
 ############ DO NOT EDIT BELOW ###########

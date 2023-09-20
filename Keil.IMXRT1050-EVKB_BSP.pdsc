@@ -3,6 +3,7 @@
   <name>IMXRT1050-EVKB_BSP</name>
   <vendor>Keil</vendor>
   <description>NXP IMXRT1050-EVKB board support pack</description>
+  <license>LICENSE</license>
   <url>https://github.com/MDK-Packs/Pack/raw/master/IMXRT1050-EVKB_BSP/</url>
   <repository type="git">https://github.com/MDK-Packs/IMXRT1050-EVKB_BSP.git</repository>
 
