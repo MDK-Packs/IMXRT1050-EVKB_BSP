@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="PACK.xsd" schemaVersion="1.7.7">
+<package schemaVersion="1.7.28" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Open-CMSIS-Pack/Open-CMSIS-Pack-Spec/v1.7.28/schema/PACK.xsd">
   <name>IMXRT1050-EVKB_BSP</name>
   <vendor>Keil</vendor>
   <description>NXP IMXRT1050-EVKB board support pack</description>
   <url>https://github.com/MDK-Packs/Pack/raw/master/IMXRT1050-EVKB_BSP/</url>
   <repository type="git">https://github.com/MDK-Packs/IMXRT1050-EVKB_BSP.git</repository>
+  <license>LICENSE</license>
 
   <releases>
+    <release version="1.1.2-dev0">
+      Pack Description:
+      - Add LICENSE file
+      - Update schemaVersion (1.7.28)
+    </release>
     <release version="1.1.1" date="2022-11-30">
       Synchronize with NXP MIMXRT1052_DFP 15.1.0 and NXP EVKB-IMXRT1050_BSP 15.1.0
       Drivers:
