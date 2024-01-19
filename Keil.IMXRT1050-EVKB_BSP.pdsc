@@ -8,6 +8,9 @@
   <license>LICENSE</license>
 
   <releases>
+    <release version="1.2.0-rc0">
+      Synchronize with NXP MIMXRT1052_DFP 17.0.0 and NXP EVKB-IMXRT1050_BSP 17.0.0
+    </release>
     <release version="1.1.2-dev0">
       Pack Description:
       - Add LICENSE file
@@ -44,8 +47,8 @@
 
   <requirements>
     <packages>
-      <package vendor="NXP" name="MIMXRT1052_DFP"     version="15.1.0-0"/>
-      <package vendor="NXP" name="EVKB-IMXRT1050_BSP" version="15.1.0-0"/>
+      <package vendor="NXP" name="MIMXRT1052_DFP"     version="17.0.0-0"/>
+      <package vendor="NXP" name="EVKB-IMXRT1050_BSP" version="17.0.0-0"/>
       <package vendor="ARM" name="CMSIS"              version="5.8.0"/>
     </packages>
   </requirements>
