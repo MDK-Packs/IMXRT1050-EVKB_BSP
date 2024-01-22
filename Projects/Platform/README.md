@@ -7,17 +7,17 @@ and is a CMSIS-RTOS2 based software template that can be further expanded.
 RTOS: Keil RTX5 Real-Time Operating System
 ------------------------------------------
 
-The real-time operating system [Keil RTX5](https://arm-software.github.io/CMSIS_5/RTOS2/html/rtx5_impl.html) implements the resource management. 
+The real-time operating system [Keil RTX5](https://arm-software.github.io/CMSIS-RTX/latest/index.html) implements the resource management. 
 
 It is configured with the following settings:
 
-- [Global Dynamic Memory size](https://arm-software.github.io/CMSIS_5/RTOS2/html/config_rtx5.html#systemConfig): 32768 bytes
-- [Default Thread Stack size](https://arm-software.github.io/CMSIS_5/RTOS2/html/config_rtx5.html#threadConfig): 3072 bytes
-- [Event Recorder Configuration](https://arm-software.github.io/CMSIS_5/RTOS2/html/config_rtx5.html#evtrecConfig)
-  - [Global Initialization](https://arm-software.github.io/CMSIS_5/RTOS2/html/config_rtx5.html#evtrecConfigGlobIni): 1
+- [Global Dynamic Memory size](https://arm-software.github.io/CMSIS-RTX/latest/config_rtx5.html#systemConfig): 32768 bytes
+- [Default Thread Stack size](https://arm-software.github.io/CMSIS-RTX/latest/config_rtx5.html#threadConfig): 3072 bytes
+- [Event Recorder Configuration](https://arm-software.github.io/CMSIS-RTX/latest/config_rtx5.html#evtrecConfig)
+  - [Global Initialization](https://arm-software.github.io/CMSIS-RTX/latest/config_rtx5.html#evtrecConfigGlobIni): 1
     - Start Recording: 1
 
-Refer to [Configure RTX v5](https://arm-software.github.io/CMSIS_5/RTOS2/html/config_rtx5.html) for a detailed description of all configuration options.
+Refer to [Configure RTX v5](https://arm-software.github.io/CMSIS-RTX/latest/config_rtx5.html) for a detailed description of all configuration options.
 
 Board: NXP IMXRT1050-EVKB
 -------------------------
@@ -113,5 +113,3 @@ The example project can be re-configured to work on custom hardware. Refer to ["
 |:------------------|:-----------------------
 | vioBUTTON0        | User Button SW8 (WAKEUP)
 | vioLED0           | User LED (GPIO_AD_B0_09)
-| vioMotionAccelero | 3-Axis Accelerometer (FXOS8700CQ)
-| vioMotionMagneto  | 3-Axis Magnetometer (FXOS8700CQ)
