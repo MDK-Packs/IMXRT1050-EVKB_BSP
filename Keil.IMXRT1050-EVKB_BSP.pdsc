@@ -12,6 +12,13 @@
       Drivers:
       - CMSIS-Driver VIO:
       -- Update VIO to API 1.0.0
+      Example projects:
+      - Update projects to CMSIS 6
+      - Migrate Event Recorder component (from Compiler to CMSIS-View pack)
+      - Add cmsis_core5.h legacy header file
+      - Platform:
+      -- Migrate STDIO components (from Compiler to CMSIS-Compiler pack)
+      -- Update README.md
     </release>
     <release version="1.2.0-rc0">
       Synchronize with NXP MIMXRT1052_DFP 17.0.0 and NXP EVKB-IMXRT1050_BSP 17.0.0
