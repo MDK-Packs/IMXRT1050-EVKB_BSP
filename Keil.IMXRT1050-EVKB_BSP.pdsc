@@ -8,6 +8,11 @@
   <license>LICENSE</license>
 
   <releases>
+    <release version="1.3.0-dev0">
+      Drivers:
+      - CMSIS-Driver VIO:
+      -- Update VIO to API 1.0.0
+    </release>
     <release version="1.2.0-rc0">
       Synchronize with NXP MIMXRT1052_DFP 17.0.0 and NXP EVKB-IMXRT1050_BSP 17.0.0
     </release>
@@ -79,7 +84,7 @@
 
   <components>
     <!-- VIO component for IMXRT1050-EVKB -->
-    <component Cclass="CMSIS Driver" Cgroup="VIO" Csub="Board" Cvariant="IMXRT1050-EVKB" Cversion="1.1.0" Capiversion="0.1.0"   condition="IMXRT1050-EVKB VIO">
+    <component Cclass="CMSIS Driver" Cgroup="VIO" Csub="Board" Cvariant="IMXRT1050-EVKB" Cversion="2.0.0" Capiversion="1.0.0"   condition="IMXRT1050-EVKB VIO">
       <description>Virtual I/O implementation for IMXRT1050-EVKB VIO</description>
       <RTE_Components_h>
         #define RTE_VIO_BOARD
